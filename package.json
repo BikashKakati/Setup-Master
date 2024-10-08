@@ -10,13 +10,30 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:installer.helloWorld"
+    "onCommand:installer.installDependency"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "installerView",
+          "title": "Installer",
+          "icon": "assets/icons/home.svg"
+        }
+      ]
+    },
+    "views": {
+      "installerView": [
+        {
+          "id": "installerDependencies",
+          "name": "Dependencies"
+        }
+      ]
+    },
     "commands": [
       {
-        "command": "installer.helloWorld",
+        "command": "installer.installDependency",
         "title": "Hello World"
       }
     ]
