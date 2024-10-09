@@ -1,7 +1,7 @@
 {
   "name": "installer",
-  "displayName": "installer",
-  "description": "",
+  "displayName": "Installer",
+  "description": "A VS Code extension for installing dependencies like Vite, Tailwind, Redux, Axios, etc.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.94.0"
@@ -10,7 +10,9 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:installer.installDependency"
+    "onView:installerDependencies",
+    "onCommand:installer.toggleDependency",
+    "onCommand:installer.installSelectedDependencies"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -33,10 +35,35 @@
     },
     "commands": [
       {
-        "command": "installer.installDependency",
-        "title": "Hello World"
+        "command": "installer.toggleDependency",
+        "title": "Toggle Dependency"
+      },
+      {
+        "command": "installer.installSelectedDependencies",
+        "title": "Install All Selected Dependencies"
       }
-    ]
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "installer.installSelectedDependencies",
+          "when": "view == installerDependencies",
+          "group": "navigation",
+          "title": "Install All",
+          "icon": {
+            "light": "assets/icons/install-light.svg",
+            "dark": "assets/icons/install-dark.svg"
+          }
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "installer.toggleDependency",
+          "when": "view == installerDependencies",
+          "group": "inline"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

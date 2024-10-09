@@ -4,10 +4,12 @@ export class DependencyItem extends vscode.TreeItem {
   constructor(
     public readonly label: string,
     public readonly description?: string,
-    public readonly command?: vscode.Command
+    public readonly command?: vscode.Command,
+    public checked: boolean = false // Track selection state
   ) {
     super(label, vscode.TreeItemCollapsibleState.None);
     this.tooltip = `${this.label}`;
+    this.contextValue = "dependencyItem";
   }
 }
 
@@ -22,16 +24,22 @@ export class DependenciesProvider
   > = this._onDidChangeTreeData.event;
 
   dependencies = [
-    { label: "Vite + Tailwind CSS", value: "vite-tailwind" },
-    { label: "Redux", value: "redux" },
-    { label: "Axios", value: "axios" },
+    { label: "Vite + Tailwind CSS", value: "vite-tailwind", checked: false },
+    { label: "Redux", value: "redux", checked: false },
+    { label: "Axios", value: "axios", checked: false },
   ];
 
+  private selectedDependencies: string[] = [];
+
+  // Refresh TreeView
   refresh(): void {
     this._onDidChangeTreeData.fire();
   }
 
   getTreeItem(element: DependencyItem): vscode.TreeItem {
+    element.iconPath = element.checked
+      ? new vscode.ThemeIcon("check")
+      : new vscode.ThemeIcon("circle-outline");
     return element;
   }
 
@@ -39,12 +47,44 @@ export class DependenciesProvider
     return Promise.resolve(
       this.dependencies.map(
         (dep) =>
-          new DependencyItem(dep.label, undefined, {
-            command: "installer.installDependency",
-            title: "Install",
-            arguments: [dep.value],
-          })
+          new DependencyItem(
+            dep.label,
+            undefined,
+            {
+              command: "installer.toggleDependency",
+              title: "Toggle Dependency",
+              arguments: [dep],
+            },
+            dep.checked
+          )
       )
     );
+  }
+
+  // Toggle the selection (check/uncheck) of a dependency
+  toggleDependency(dep: any) {
+    dep.checked = !dep.checked;
+    if (dep.checked) {
+      this.selectedDependencies.push(dep.value);
+      vscode.window.showInformationMessage(`${dep.label} selected.`);
+    } else {
+      this.selectedDependencies = this.selectedDependencies.filter(
+        (d) => d !== dep.value
+      );
+      vscode.window.showInformationMessage(`${dep.label} deselected.`);
+    }
+    this.refresh();
+  }
+
+  // Get all selected dependencies
+  getSelectedDependencies(): string[] {
+    return this.selectedDependencies;
+  }
+
+  // Clear selected dependencies after installation
+  clearSelectedDependencies() {
+    this.selectedDependencies = [];
+    this.dependencies.forEach((dep) => (dep.checked = false));
+    this.refresh();
   }
 }
