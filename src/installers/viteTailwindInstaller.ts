@@ -5,7 +5,7 @@ import * as vscode from "vscode";
 
 export class ViteTailwindInstaller extends DependencyInstaller {
   install() {
-    this.runCommand("npm create vite@latest my-vite-app --template react");
+    this.runCommand("npm create vite@latest my-vite-app -- --template react-ts");
     this.runCommand("cd my-vite-app");
     this.runCommand("npm install -D tailwindcss postcss autoprefixer");
     this.runCommand("npx tailwindcss init -p");

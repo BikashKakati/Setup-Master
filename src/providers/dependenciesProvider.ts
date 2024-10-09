@@ -44,21 +44,22 @@ export class DependenciesProvider
   }
 
   getChildren(element?: DependencyItem): Thenable<DependencyItem[]> {
-    return Promise.resolve(
-      this.dependencies.map(
-        (dep) =>
-          new DependencyItem(
-            dep.label,
-            undefined,
-            {
-              command: "installer.toggleDependency",
-              title: "Toggle Dependency",
-              arguments: [dep],
-            },
-            dep.checked
-          )
-      )
+  
+    const dependencyItems = this.dependencies.map(
+      (dep) =>
+        new DependencyItem(
+          dep.label,
+          undefined,
+          {
+            command: 'installer.toggleDependency',
+            title: 'Toggle Dependency',
+            arguments: [dep],
+          },
+          dep.checked 
+        )
     );
+  
+    return Promise.resolve(dependencyItems);
   }
 
   // Toggle the selection (check/uncheck) of a dependency

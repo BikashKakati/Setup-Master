@@ -14,15 +14,14 @@ export function activate(context: vscode.ExtensionContext) {
   // Register the install command
   registerInstallCommand(context, dependenciesProvider);
 
-  // Add an "Install All" button in the status bar
   const installAllButton = vscode.window.createStatusBarItem(
     vscode.StatusBarAlignment.Left,
     100
   );
-  installAllButton.text = "$(cloud-download) Install All Dependencies"; // Icon and text
-  installAllButton.command = "installer.installSelectedDependencies"; // Command to trigger
+  installAllButton.text = "$(cloud-download)"; // Icon and text
+  installAllButton.command = "installer.installSelectedDependencies";
   installAllButton.tooltip = "Click to install all selected dependencies";
-  installAllButton.show(); // Make sure the button is visible
+  installAllButton.show(); 
 
   context.subscriptions.push(installAllButton); // Clean up the button when deactivated
 }
