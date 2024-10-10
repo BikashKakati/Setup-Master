@@ -35,7 +35,12 @@ export function registerInstallCommand(
 
       // Install dependencies one by one
       selectedDependencies.forEach((dep) => {
-        const installer = getInstaller(dep, terminal, workspaceRoot);
+        const installer = getInstaller(
+          selectedDependencies,
+          dep,
+          terminal,
+          workspaceRoot
+        );
         if (installer) {
           installer.install();
         }

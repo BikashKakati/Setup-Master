@@ -24,7 +24,12 @@ export class DependenciesProvider
   > = this._onDidChangeTreeData.event;
 
   dependencies = [
-    { label: "Vite + Tailwind CSS", value: "vite-tailwind", checked: false },
+    { label: "React", value: "react", checked: false },
+    { label: "Vite", value: "vite", checked: false },
+    { label: "Nextjs", value: "next", checked: false },
+    { label: "Javascript", value: "js", checked: false },
+    { label: "Typescript", value: "ts", checked: false },
+    { label: "Tailwind", value: "tailwind", checked: false },
     { label: "Redux", value: "redux", checked: false },
     { label: "Axios", value: "axios", checked: false },
   ];
@@ -44,21 +49,20 @@ export class DependenciesProvider
   }
 
   getChildren(element?: DependencyItem): Thenable<DependencyItem[]> {
-  
     const dependencyItems = this.dependencies.map(
       (dep) =>
         new DependencyItem(
           dep.label,
           undefined,
           {
-            command: 'installer.toggleDependency',
-            title: 'Toggle Dependency',
+            command: "installer.toggleDependency",
+            title: "Toggle Dependency",
             arguments: [dep],
           },
-          dep.checked 
+          dep.checked
         )
     );
-  
+
     return Promise.resolve(dependencyItems);
   }
 
