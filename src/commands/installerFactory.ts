@@ -4,6 +4,7 @@ import { FrameworkInstaller } from "../installers/FrameworkInstaller";
 import { ReduxInstaller } from "../installers/reduxInstaller";
 import { axiosInstaller } from "../installers/axiosInstaller";
 import { tailwindInstaller } from "../installers/tailwindInstaller";
+import { ShadcnInstaller } from "../installers/shadcnInstaller";
 
 export function getInstaller(
   selectedDependencies: string[],
@@ -30,6 +31,8 @@ export function getInstaller(
         workspaceRoot,
         selectedDependencies
       );
+    case "shadcn":
+      return new ShadcnInstaller(terminal, workspaceRoot, selectedDependencies);
     default:
       return null;
   }

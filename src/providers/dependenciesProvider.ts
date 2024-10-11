@@ -30,6 +30,7 @@ export class DependenciesProvider
     { label: "Javascript", value: "js", checked: false },
     { label: "Typescript", value: "ts", checked: false },
     { label: "Tailwind", value: "tailwind", checked: false },
+    { label: "shadcn", value: "shadcn", checked: false },
     { label: "Redux", value: "redux", checked: false },
     { label: "Axios", value: "axios", checked: false },
   ];
@@ -69,8 +70,12 @@ export class DependenciesProvider
   // Toggle the selection (check/uncheck) of a dependency
   toggleDependency(dep: any) {
     dep.checked = !dep.checked;
+    const topDependencies = ["react", "vite", "next"];
+
     if (dep.checked) {
-      this.selectedDependencies.push(dep.value);
+      topDependencies.includes(dep.value)
+        ? this.selectedDependencies.unshift(dep.value)
+        : this.selectedDependencies.push(dep.value);
       vscode.window.showInformationMessage(`${dep.label} selected.`);
     } else {
       this.selectedDependencies = this.selectedDependencies.filter(
