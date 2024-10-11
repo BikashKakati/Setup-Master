@@ -9,24 +9,24 @@ export const dependencies: DependencyOrCategory[] = [
           label: "Languages",
           collapsible: true,
           children: [
-            { label: "JavaScript", value: "javascript", checked: false, icon: "javascript" },
-            { label: "TypeScript", value: "typescript", checked: false, icon: "typescript" },
+            { label: "JavaScript", value: "js", checked: false, icon: "javascript" },
+            { label: "TypeScript", value: "ts", checked: false, icon: "typescript" },
           ]
         },
         {
           label: "Frameworks",
           collapsible: true,
           children: [
-            { label: "React", value: "react-js", checked: false, icon: "react" },
-            { label: "Next", value: "next-js", checked: false, icon: "next" },
-            { label: "Vite", value: "vite-js", checked: false, icon: "vite" },
+            { label: "React", value: "react", checked: false, icon: "react" },
+            { label: "Next", value: "next", checked: false, icon: "next" },
+            { label: "Vite", value: "vite", checked: false, icon: "vite" },
           ]
         },
         {
           label: "Styles",
           collapsible: true,
           children: [
-            { label: "Tailwind CSS", value: "tailwind-css", checked: false, icon: "tailwind-icon" },
+            { label: "Tailwind CSS", value: "tailwind", checked: false, icon: "tailwind-icon" },
             { label: "Bootstrap", value: "bootstrap", checked: false, icon: "bootstrap-icon" },
           ]
         },
