@@ -144,8 +144,12 @@ private findCategoryByLabel(categories: DependencyOrCategory[], label: string): 
   // Toggle the selection (check/uncheck) of a dependency
   toggleDependency(dep: Dependency) {
     dep.checked = !dep.checked;
+    const topDependencies = ["react", "vite", "next"];
+
     if (dep.checked) {
-      this.selectedDependencies.push(dep.value);
+      topDependencies.includes(dep.value)
+        ? this.selectedDependencies.unshift(dep.value)
+        : this.selectedDependencies.push(dep.value);
       vscode.window.showInformationMessage(`${dep.label} selected.`);
     } else {
       this.selectedDependencies = this.selectedDependencies.filter(
