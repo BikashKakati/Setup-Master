@@ -73,6 +73,7 @@ export const dependencies: DependencyOrCategory[] = [
             icon: "redux-icon",
           },
           { label: "Zod", value: "zod", checked: false, icon: "zod-icon" },
+          { label: "Zustand", value: "zustand", checked: false, icon: "zustand-icon" },
           {
             label: "React Hook Form",
             value: "reactHookForm",
