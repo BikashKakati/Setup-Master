@@ -14,6 +14,7 @@ export class FrameworkInstaller extends DependencyInstaller {
       }`;
       this.runCommand(viteCommand);
       this.runCommand("cd my-vite-app");
+      this.runCommand("npm install");
     } else if (dependencyArray.includes("react")) {
       framework = "react";
       const craCommand = `npx create-react-app my-project --template ${
