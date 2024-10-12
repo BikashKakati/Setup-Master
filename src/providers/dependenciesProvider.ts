@@ -1,19 +1,16 @@
 import * as vscode from "vscode";
-import * as path from "path"; 
+import * as path from "path";
 import { Category, Dependency, DependencyOrCategory } from "../types";
-
-
-
-
 
 export class DependencyItem extends vscode.TreeItem {
   constructor(
     public readonly label: string,
     public readonly description?: string,
     public readonly command?: vscode.Command,
-    public checked: boolean = false, 
-    public iconPath?: vscode.ThemeIcon | vscode.Uri | string, 
-    public collapsibleState: vscode.TreeItemCollapsibleState = vscode.TreeItemCollapsibleState.None
+    public checked: boolean = false,
+    public iconPath?: vscode.ThemeIcon | vscode.Uri | string,
+    public collapsibleState: vscode.TreeItemCollapsibleState = vscode
+      .TreeItemCollapsibleState.None
   ) {
     super(label, collapsibleState);
     this.tooltip = `${this.label}`;
@@ -27,57 +24,58 @@ export class DependenciesProvider
   private _onDidChangeTreeData: vscode.EventEmitter<
     DependencyItem | undefined | void
   > = new vscode.EventEmitter<DependencyItem | undefined | void>();
-  readonly onDidChangeTreeData: vscode.Event<DependencyItem | undefined | void> =
-    this._onDidChangeTreeData.event;
+  readonly onDidChangeTreeData: vscode.Event<
+    DependencyItem | undefined | void
+  > = this._onDidChangeTreeData.event;
 
   private selectedDependencies: string[] = [];
   private dependencies: DependencyOrCategory[];
 
-  constructor(private context: vscode.ExtensionContext, dependencies: DependencyOrCategory[]) {
+  constructor(
+    private context: vscode.ExtensionContext,
+    dependencies: DependencyOrCategory[]
+  ) {
     this.dependencies = dependencies;
-  } 
+  }
 
-
-private findCategoryByLabel(categories: DependencyOrCategory[], label: string): Category | undefined {
-  for (const cat of categories) {
-    if (cat.label === label && 'children' in cat) {
-      return cat as Category;
-    }
-    if ('children' in cat) {
-      const found = this.findCategoryByLabel(cat.children, label);
-      if (found) {
-        return found;
+  private findCategoryByLabel(
+    categories: DependencyOrCategory[],
+    label: string
+  ): Category | undefined {
+    for (const cat of categories) {
+      if (cat.label === label && "children" in cat) {
+        return cat as Category;
+      }
+      if ("children" in cat) {
+        const found = this.findCategoryByLabel(cat.children, label);
+        if (found) {
+          return found;
+        }
       }
     }
+    return undefined;
   }
-  return undefined;
-}
-
-
-
 
   refresh(): void {
     this._onDidChangeTreeData.fire();
   }
 
-
   getTreeItem(element: DependencyItem): vscode.TreeItem {
     if (element.checked) {
       element.iconPath = new vscode.ThemeIcon("check");
     } else if (element.iconPath) {
-      element.iconPath = this.getIconPath(element.iconPath.toString()); 
+      element.iconPath = this.getIconPath(element.iconPath.toString());
     } else {
-      element.iconPath = new vscode.ThemeIcon("circle-outline"); 
+      // element.iconPath = new vscode.ThemeIcon("circle-outline");
     }
     return element;
   }
-
 
   getChildren(element?: DependencyItem): Thenable<DependencyItem[]> {
     if (!element) {
       return Promise.resolve(
         this.dependencies.map((depOrCat) => {
-          if ('collapsible' in depOrCat) {
+          if ("collapsible" in depOrCat) {
             // It's a category
             return new DependencyItem(
               depOrCat.label,
@@ -92,8 +90,8 @@ private findCategoryByLabel(categories: DependencyOrCategory[], label: string): 
               depOrCat.label,
               undefined,
               {
-                command: 'installer.toggleDependency',
-                title: 'Toggle Dependency',
+                command: "installer.toggleDependency",
+                title: "Select",
                 arguments: [depOrCat],
               },
               depOrCat.checked,
@@ -104,12 +102,15 @@ private findCategoryByLabel(categories: DependencyOrCategory[], label: string): 
       );
     } else {
       // Find the corresponding category for the selected element
-      const category = this.findCategoryByLabel(this.dependencies, element.label);
-  
+      const category = this.findCategoryByLabel(
+        this.dependencies,
+        element.label
+      );
+
       if (category && category.children) {
         return Promise.resolve(
           category.children.map((child) => {
-            if ('collapsible' in child) {
+            if ("collapsible" in child) {
               return new DependencyItem(
                 child.label,
                 undefined,
@@ -123,8 +124,8 @@ private findCategoryByLabel(categories: DependencyOrCategory[], label: string): 
                 child.label,
                 undefined,
                 {
-                  command: 'installer.toggleDependency',
-                  title: 'Toggle Dependency',
+                  command: "installer.toggleDependency",
+                  title: "Select",
                   arguments: [child],
                 },
                 child.checked,
@@ -135,11 +136,9 @@ private findCategoryByLabel(categories: DependencyOrCategory[], label: string): 
         );
       }
     }
-  
+
     return Promise.resolve([]);
   }
-  
-  
 
   // Toggle the selection (check/uncheck) of a dependency
   toggleDependency(dep: Dependency) {
@@ -160,7 +159,6 @@ private findCategoryByLabel(categories: DependencyOrCategory[], label: string): 
     this.refresh();
   }
 
-
   getSelectedDependencies(): string[] {
     return this.selectedDependencies;
   }
@@ -169,7 +167,7 @@ private findCategoryByLabel(categories: DependencyOrCategory[], label: string): 
   clearSelectedDependencies() {
     this.selectedDependencies = [];
     this.dependencies.forEach((dep) => {
-      if (!('collapsible' in dep)) {
+      if (!("collapsible" in dep)) {
         dep.checked = false;
       }
     });
@@ -179,7 +177,7 @@ private findCategoryByLabel(categories: DependencyOrCategory[], label: string): 
   // Helper function to get the icon path
   getIconPath(iconName: string): vscode.Uri | vscode.ThemeIcon {
     const assetPath = path.join(this.context.extensionPath, "assets");
-    if(!iconName){
+    if (!iconName) {
       return new vscode.ThemeIcon("circle-outline");
     }
     return vscode.Uri.file(path.join(assetPath, `${iconName}.png`));

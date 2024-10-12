@@ -10,6 +10,9 @@
     "Other"
   ],
   "activationEvents": [
+    "onView:installerDependencies",
+    "onCommand:installer.toggleDependency",
+    "onCommand:installer.installSelectedDependencies"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -33,12 +36,12 @@
     "commands": [
       {
         "command": "installer.toggleDependency",
-        "title": "Toggle Dependency"
+        "title": "Select"
       },
       {
         "command": "installer.installSelectedDependencies",
         "title": "Install All Selected Dependencies",
-        "icon":"$(check-all)"
+        "icon": "$(check-all)"
       }
     ],
     "menus": {

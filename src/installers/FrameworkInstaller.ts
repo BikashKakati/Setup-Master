@@ -22,6 +22,7 @@ export class FrameworkInstaller extends DependencyInstaller {
       }`;
       this.runCommand(craCommand);
       this.runCommand("cd my-project");
+      this.runCommand("npm install");
     } else if (dependencyArray.includes("next")) {
       framework = "next";
       const nextCommand = `npx create-next-app@latest my-project ${
@@ -30,6 +31,7 @@ export class FrameworkInstaller extends DependencyInstaller {
 `;
       this.runCommand(nextCommand);
       this.runCommand("cd my-project");
+      this.runCommand("npm install");
     }
 
     vscode.window.showInformationMessage(`${framework} setup complete!`);
