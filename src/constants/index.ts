@@ -43,16 +43,22 @@ export const dependencies: DependencyOrCategory[] = [
             icon: "tailwind-icon",
           },
           {
-            label: "Shadcn",
-            value: "shdcn",
-            checked: false,
-            icon: "shadcn-icon",
-          },
-          {
             label: "Bootstrap",
             value: "bootstrap",
             checked: false,
             icon: "bootstrap-icon",
+          },
+        ],
+      },
+      {
+        label: "UI Libraries",
+        collapsible: true,
+        children: [
+          {
+            label: "Shadcn",
+            value: "shadcn",
+            checked: false,
+            icon: "shadcn-icon",
           },
         ],
       },
@@ -73,7 +79,12 @@ export const dependencies: DependencyOrCategory[] = [
             icon: "redux-icon",
           },
           { label: "Zod", value: "zod", checked: false, icon: "zod-icon" },
-          { label: "Zustand", value: "zustand", checked: false, icon: "zustand-icon" },
+          {
+            label: "Zustand",
+            value: "zustand",
+            checked: false,
+            icon: "zustand-icon",
+          },
           {
             label: "React Hook Form",
             value: "reactHookForm",
@@ -85,5 +96,9 @@ export const dependencies: DependencyOrCategory[] = [
     ],
   },
 ];
-export const onlyOneSelectCategoriesList:string[] = ["Frameworks", "Styles", "Languages"];
-export const topDependenciesList :string[] = ["react", "vite", "next"];
+export const onlyOneSelectCategoriesList: string[] = [
+  "Frameworks",
+  "Styles",
+  "Languages",
+];
+export const topDependenciesList: string[] = ["react", "vite", "next"];

@@ -145,6 +145,7 @@ export class DependenciesProvider
     dep: Dependency,
     currentCategories: Category[]
   ): Category | undefined {
+    console.log("currentcat", currentCategories);
     for (const category of currentCategories) {
       if ("children" in category) {
         // Check if the dependency is directly in this category's children
@@ -169,7 +170,7 @@ export class DependenciesProvider
       }
     }
 
-    return undefined; 
+    return undefined;
   }
 
   // Toggle the selection (check/uncheck) of a dependency
@@ -180,6 +181,7 @@ export class DependenciesProvider
       dep,
       this.dependencies as Category[]
     );
+
     if (
       nearestParentCategory &&
       nearestParentCategory.children &&
@@ -194,10 +196,15 @@ export class DependenciesProvider
         }
       });
     }
+    const needTailwind = ["shadcn", "radixui"];
 
+    if (
+      needTailwind.includes(dep.value) &&
+      !this.selectedDependencies.includes("tailwind")
+    ) {
+    }
 
     dep.checked = !dep.checked;
-    // const topDependencies = ["react", "vite", "next"];
 
     if (dep.checked) {
       topDependenciesList.includes(dep.value)
