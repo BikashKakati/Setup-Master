@@ -5,6 +5,8 @@ import { ReduxInstaller } from "../installers/reduxInstaller";
 import { axiosInstaller } from "../installers/axiosInstaller";
 import { tailwindInstaller } from "../installers/tailwindInstaller";
 import { ShadcnInstaller } from "../installers/shadcnInstaller";
+import { zodInstaller } from "../installers/zodInstaller";
+import { reactHookFormInstaller } from "../installers/reactHookFormInstaller";
 
 export function getInstaller(
   selectedDependencies: string[],
@@ -25,6 +27,10 @@ export function getInstaller(
       return new ReduxInstaller(terminal, workspaceRoot);
     case "axios":
       return new axiosInstaller(terminal, workspaceRoot);
+    case "zod":
+      return new zodInstaller(terminal, workspaceRoot);
+    case "reactHookForm":
+      return new reactHookFormInstaller(terminal, workspaceRoot);
     case "tailwind":
       return new tailwindInstaller(
         terminal,
