@@ -17,8 +17,8 @@ export class FrameworkInstaller extends DependencyInstaller {
       this.runCommand("npm install");
     } else if (dependencyArray.includes("react")) {
       framework = "react";
-      const craCommand = `npx create-react-app my-project --template ${
-        dependencyArray.includes("ts") ? "typescript" : ""
+      const craCommand = `npx create-react-app my-project  ${
+        dependencyArray.includes("ts") ? "--template typescript" : ""
       }`;
       this.runCommand(craCommand);
       this.runCommand("cd my-project");
