@@ -10,9 +10,6 @@
     "Other"
   ],
   "activationEvents": [
-    "onView:installerDependencies",
-    "onCommand:installer.toggleDependency",
-    "onCommand:installer.installSelectedDependencies"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -21,7 +18,7 @@
         {
           "id": "installerView",
           "title": "Installer",
-          "icon": "assets/home.svg"
+          "icon": "assets/download.svg"
         }
       ]
     },
@@ -35,11 +32,11 @@
     },
     "commands": [
       {
-        "command": "installer.toggleDependency",
-        "title": "Select"
+        "command": "installerDependencies.toggleDependency",
+        "title": "select"
       },
       {
-        "command": "installer.installSelectedDependencies",
+        "command": "installerDependencies.installSelectedDependencies",
         "title": "Install All Selected Dependencies",
         "icon": "$(check-all)"
       }
@@ -47,14 +44,14 @@
     "menus": {
       "view/title": [
         {
-          "command": "installer.installSelectedDependencies",
+          "command": "installerDependencies.installSelectedDependencies",
           "when": "view == installerDependencies",
           "group": "navigation"
         }
       ],
       "view/item/context": [
         {
-          "command": "installer.toggleDependency",
+          "command": "installerDependencies.toggleDependency",
           "when": "view == installerDependencies",
           "group": "inline"
         }

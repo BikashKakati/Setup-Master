@@ -7,13 +7,13 @@ export function registerInstallCommand(
   dependenciesProvider: DependenciesProvider
 ) {
   // Command to toggle a dependency's selection
-  vscode.commands.registerCommand("installer.toggleDependency", (dep) => {
+ const toggleDependenciesCommand = vscode.commands.registerCommand("installerDependencies.toggleDependency", (dep) => {
     dependenciesProvider.toggleDependency(dep);
   });
 
   // Command to install all selected dependencies
-  vscode.commands.registerCommand(
-    "installer.installSelectedDependencies",
+ const installDependenciesCommand = vscode.commands.registerCommand(
+    "installerDependencies.installSelectedDependencies",
     async () => {
       const selectedDependencies =
         dependenciesProvider.getSelectedDependencies();
@@ -54,4 +54,6 @@ export function registerInstallCommand(
       dependenciesProvider.clearSelectedDependencies();
     }
   );
+
+  context.subscriptions.push(toggleDependenciesCommand, installDependenciesCommand);
 }
