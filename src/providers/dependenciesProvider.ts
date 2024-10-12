@@ -182,6 +182,8 @@ export class DependenciesProvider
       this.dependencies as Category[]
     );
 
+    console.log(this.dependencies);
+
     if (
       nearestParentCategory &&
       nearestParentCategory.children &&
@@ -196,14 +198,32 @@ export class DependenciesProvider
         }
       });
     }
-    const needTailwind = ["shadcn", "radixui"];
+    const tailwindDependentLibraries = ["shadcn", "radixui"];
 
     if (
-      needTailwind.includes(dep.value) &&
+      tailwindDependentLibraries.includes(dep.value) &&
       !this.selectedDependencies.includes("tailwind")
     ) {
+      this.dependencies.forEach((category: DependencyOrCategory) => {
+        if ("children" in category) {
+          category.children.forEach((subcategory: DependencyOrCategory) => {
+            if ("children" in subcategory) {
+              subcategory.children.forEach(
+                (dependency: DependencyOrCategory) => {
+                  if (
+                    "value" in dependency &&
+                    dependency.value === "tailwind"
+                  ) {
+                    dependency.checked = true;
+                  }
+                }
+              );
+            }
+          });
+        }
+      });
+      vscode.window.showInformationMessage(`tailwind selected.`);
     }
-
     dep.checked = !dep.checked;
 
     if (dep.checked) {
