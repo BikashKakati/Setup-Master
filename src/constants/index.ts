@@ -41,3 +41,6 @@ export const dependencies: DependencyOrCategory[] = [
       ],
     },
   ];
+
+  export const onlyOneSelectCategoriesList:string[] = ["Frameworks", "Styles", "Languages"];
+  export const topDependenciesList :string[] = ["react", "vite", "next"];
