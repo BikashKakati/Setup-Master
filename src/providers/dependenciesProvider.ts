@@ -1,5 +1,6 @@
-import * as vscode from "vscode";
 import * as path from "path";
+import * as vscode from "vscode";
+import { onlyOneSelectCategoriesList, topDependenciesList } from "../constants";
 import { Category, Dependency, DependencyOrCategory } from "../types";
 
 export class DependencyItem extends vscode.TreeItem {
@@ -90,7 +91,7 @@ export class DependenciesProvider
               depOrCat.label,
               undefined,
               {
-                command: "installer.toggleDependency",
+                command: "installerDependencies.toggleDependency",
                 title: "Select",
                 arguments: [depOrCat],
               },
@@ -124,7 +125,7 @@ export class DependenciesProvider
                 child.label,
                 undefined,
                 {
-                  command: "installer.toggleDependency",
+                  command: "installerDependencies.toggleDependency",
                   title: "Select",
                   arguments: [child],
                 },
@@ -140,15 +141,69 @@ export class DependenciesProvider
     return Promise.resolve([]);
   }
 
+  findNearestParentCategory(
+    dep: Dependency,
+    currentCategories: Category[]
+  ): Category | undefined {
+    for (const category of currentCategories) {
+      if ("children" in category) {
+        // Check if the dependency is directly in this category's children
+        const foundInChildren = category.children.some(
+          (child) => child.label === dep.label
+        );
+        if (foundInChildren) {
+          return category; // Return the current category if the dependency is found
+        }
+
+        // Recursively check each child that could be a category
+        for (const child of category.children) {
+          if ("children" in child) {
+            const foundInNestedCategory = this.findNearestParentCategory(dep, [
+              child,
+            ]);
+            if (foundInNestedCategory) {
+              return foundInNestedCategory; // Return the nearest nested category
+            }
+          }
+        }
+      }
+    }
+
+    return undefined; 
+  }
+
   // Toggle the selection (check/uncheck) of a dependency
   toggleDependency(dep: Dependency) {
+    // user can select only option, logic...
+    // const onlyOneSelectCategories = ["Frameworks", "Styles", "Languages"];
+    const nearestParentCategory = this.findNearestParentCategory(
+      dep,
+      this.dependencies as Category[]
+    );
+    if (
+      nearestParentCategory &&
+      nearestParentCategory.children &&
+      onlyOneSelectCategoriesList.includes(nearestParentCategory.label)
+    ) {
+      nearestParentCategory.children.forEach((child) => {
+        if (!("children" in child) && child !== dep && child.checked) {
+          child.checked = false; // Deselect other dependencies
+          this.selectedDependencies = this.selectedDependencies.filter(
+            (d) => d !== child.value
+          );
+        }
+      });
+    }
+
+
     dep.checked = !dep.checked;
-    const topDependencies = ["react", "vite", "next"];
+    // const topDependencies = ["react", "vite", "next"];
 
     if (dep.checked) {
-      topDependencies.includes(dep.value)
+      topDependenciesList.includes(dep.value)
         ? this.selectedDependencies.unshift(dep.value)
         : this.selectedDependencies.push(dep.value);
+
       vscode.window.showInformationMessage(`${dep.label} selected.`);
     } else {
       this.selectedDependencies = this.selectedDependencies.filter(

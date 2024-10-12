@@ -20,7 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
     100
   );
   installAllButton.text = "$(cloud-download)"; // Icon and text
-  installAllButton.command = "installer.installSelectedDependencies";
+  installAllButton.command = "installerDependencies.installSelectedDependencies";
   installAllButton.tooltip = "Click to install all selected dependencies";
   installAllButton.show(); 
 
