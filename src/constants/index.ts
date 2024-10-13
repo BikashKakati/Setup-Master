@@ -57,6 +57,7 @@ export const dependencies: DependencyOrCategory[] = [
       {
         label: "UI Libraries",
         collapsible: true,
+        icon:"ui-libraries-icon",
         children: [
           {
             label: "Shadcn",
