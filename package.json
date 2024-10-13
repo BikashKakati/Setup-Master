@@ -1,8 +1,8 @@
 {
   "name": "SetUp-Master",
-  "displayName": "SetUp-Master",
+  "displayName": "Setup Master",
   "publisher": "SetupMaster",
-  "description": "A VS Code extension for installing dependencies like Vite, Tailwind, Redux, Axios, etc.",
+  "description": "Instantly set up projects by selecting and installing dependencies effortlessly",
   "repository": {
     "type": "git",
     "url": "https://github.com/swapnilchougule00/vs-code-extension-installer.git"
@@ -11,11 +11,11 @@
   "engines": {
     "vscode": "^1.94.0"
   },
+  "icon": "assets/download.svg",
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-  ],
+  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "viewsWelcome": [
