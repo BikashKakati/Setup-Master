@@ -18,15 +18,22 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsWelcome": [
+      {
+        "view": "installerDependencies", 
+        "contents": "[Install Dependencies](command:installerDependencies.installSelectedDependencies)"
+      }
+    ],
     "viewsContainers": {
       "activitybar": [
         {
           "id": "installerView",
           "title": "Setup Master",
-          "icon": "assets/download.svg"
+          "icon": "assets/download-light.svg"
         }
       ]
     },
+
     "views": {
       "installerView": [
         {
@@ -43,7 +50,20 @@
       {
         "command": "installerDependencies.installSelectedDependencies",
         "title": "Install All Selected Dependencies",
-        "icon": "$(check-all)"
+        "icon":{
+          "light": "assets/download-light.svg",
+          "dark":  "assets/download-dark.svg"
+        }
+      },
+      {
+        "command": "installerDependencies.search",
+        "title": "search",
+        "icon": "$(search)"
+      },
+      {
+        "command": "installerDependencies.close",
+        "title": "close",
+        "icon": "$(close)"
       }
     ],
     "menus": {
@@ -52,6 +72,18 @@
           "command": "installerDependencies.installSelectedDependencies",
           "when": "view == installerDependencies",
           "group": "navigation"
+        },
+        {
+          "command": "installerDependencies.search",
+          "when": "view == installerDependencies",
+          "group": "navigation",
+          "title": "Search Dependencies"
+        },
+        {
+          "command": "installerDependencies.close",
+          "when": "view == installerDependencies",
+          "group": "navigation",
+          "title": "Close Dependencies"
         }
       ],
       "view/item/context": [

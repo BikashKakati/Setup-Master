@@ -7,12 +7,39 @@ export function registerInstallCommand(
   dependenciesProvider: DependenciesProvider
 ) {
   // Command to toggle a dependency's selection
- const toggleDependenciesCommand = vscode.commands.registerCommand("installerDependencies.toggleDependency", (dep) => {
-    dependenciesProvider.toggleDependency(dep);
+  const toggleDependenciesCommand = vscode.commands.registerCommand(
+    "installerDependencies.toggleDependency",
+    (dep) => {
+      dependenciesProvider.toggleDependency(dep);
+    }
+  );
+
+  // create input box
+  const inputBox = vscode.window.createInputBox();
+  inputBox.onDidAccept(() => {
+    const query = inputBox.value.trim();
+    if (query) {
+      dependenciesProvider.refresh(query);
+    }
   });
 
+  const searchCommand = vscode.commands.registerCommand(
+    "installerDependencies.search",
+    () => {
+      inputBox.placeholder = "Search Dependencies";
+      inputBox.show();
+    }
+  );
+  const closeSearchResult = vscode.commands.registerCommand(
+    "installerDependencies.close",
+    () => {
+      dependenciesProvider.refresh();
+      inputBox.dispose();
+    }
+  );
+
   // Command to install all selected dependencies
- const installDependenciesCommand = vscode.commands.registerCommand(
+  const installDependenciesCommand = vscode.commands.registerCommand(
     "installerDependencies.installSelectedDependencies",
     async () => {
       const selectedDependencies =
@@ -55,5 +82,10 @@ export function registerInstallCommand(
     }
   );
 
-  context.subscriptions.push(toggleDependenciesCommand, installDependenciesCommand);
+  context.subscriptions.push(
+    toggleDependenciesCommand,
+    searchCommand,
+    closeSearchResult,
+    installDependenciesCommand
+  );
 }

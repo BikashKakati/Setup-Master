@@ -31,6 +31,9 @@ export class DependenciesProvider
 
   private selectedDependencies: string[] = [];
   private dependencies: DependencyOrCategory[];
+  private searchQuery: string | undefined;
+  searchActive: boolean = false; // Tracks whether the search is active
+
 
   constructor(
     private context: vscode.ExtensionContext,
@@ -57,11 +60,19 @@ export class DependenciesProvider
     return undefined;
   }
 
-  refresh(): void {
+  refresh(searchQuery?: string): void {
+    if (searchQuery) {
+      this.searchQuery = searchQuery;
+      this.searchActive = true;
+    } else {
+      this.searchQuery = undefined;
+      this.searchActive = false;
+    }
     this._onDidChangeTreeData.fire();
   }
 
   getTreeItem(element: DependencyItem): vscode.TreeItem {
+
     if (element.checked) {
       element.iconPath = new vscode.ThemeIcon("check");
     } else if (element.iconPath) {
@@ -74,8 +85,8 @@ export class DependenciesProvider
 
   getChildren(element?: DependencyItem): Thenable<DependencyItem[]> {
     if (!element) {
-      return Promise.resolve(
-        this.dependencies.map((depOrCat) => {
+      
+        const dependencyItem = this.dependencies.map((depOrCat) => {
           if ("collapsible" in depOrCat) {
             // It's a category
             return new DependencyItem(
@@ -99,8 +110,14 @@ export class DependenciesProvider
               depOrCat.icon
             );
           }
-        })
-      );
+        });
+
+        if(this.searchQuery){
+          const searchResult = this.searchDependencies(this.searchQuery);
+          return Promise.resolve([...searchResult, ...dependencyItem]);
+        }
+        return Promise.resolve(dependencyItem);
+
     } else {
       // Find the corresponding category for the selected element
       const category = this.findCategoryByLabel(
@@ -162,20 +179,65 @@ export class DependenciesProvider
               child,
             ]);
             if (foundInNestedCategory) {
-              return foundInNestedCategory; // Return the nearest nested category
+              return foundInNestedCategory; 
             }
           }
         }
       }
     }
 
-    return undefined; 
+    return undefined;
   }
+  getAllDependencies(): DependencyItem[] {
+    const allDependencies: DependencyItem[] = [];
+  
+    const traverseDependencies = (deps: DependencyOrCategory[]) => {
+      deps.forEach(depOrCat => {
+        if ('children' in depOrCat) {
+          // If it's a category, continue traversing
+          traverseDependencies(depOrCat.children);
+        } else {
+          // If it's a dependency, add it to the array
+          allDependencies.push(
+            new DependencyItem(
+              depOrCat.label,
+              undefined,
+              {
+                command: "installerDependencies.toggleDependency",
+                title: "Select",
+                arguments: [depOrCat],
+              },
+              depOrCat.checked,
+              depOrCat.icon
+            )
+          );
+        }
+      });
+    };
+  
+    traverseDependencies(this.dependencies);
+    return allDependencies;
+  }
+
+  searchDependencies(query: string): DependencyItem[] {
+    const allDependencies = this.getAllDependencies();
+    
+    if (!query) {
+      return allDependencies;
+    }
+  
+    const filteredDependencies = allDependencies.filter(depItem =>
+      depItem.label.toLowerCase().includes(query.toLowerCase())
+    );
+
+    return filteredDependencies;
+  }
+  
+  
 
   // Toggle the selection (check/uncheck) of a dependency
   toggleDependency(dep: Dependency) {
     // user can select only option, logic...
-    // const onlyOneSelectCategories = ["Frameworks", "Styles", "Languages"];
     const nearestParentCategory = this.findNearestParentCategory(
       dep,
       this.dependencies as Category[]
@@ -195,9 +257,7 @@ export class DependenciesProvider
       });
     }
 
-
     dep.checked = !dep.checked;
-    // const topDependencies = ["react", "vite", "next"];
 
     if (dep.checked) {
       topDependenciesList.includes(dep.value)
