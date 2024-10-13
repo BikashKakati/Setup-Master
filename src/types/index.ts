@@ -8,6 +8,7 @@ export interface Dependency {
 export interface Category {
   label: string;
   collapsible: boolean;
+  icon?: string;
   children: Dependency[] | Category[];
 }
 

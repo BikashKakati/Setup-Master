@@ -4,10 +4,12 @@ export const dependencies: DependencyOrCategory[] = [
   {
     label: "Frontend",
     collapsible: true,
+    icon:"frontend-icon",
     children: [
       {
         label: "Languages",
         collapsible: true,
+        icon:"language-icon",
         children: [
           {
             label: "JavaScript",
@@ -26,6 +28,7 @@ export const dependencies: DependencyOrCategory[] = [
       {
         label: "Frameworks",
         collapsible: true,
+        icon:"framework-icon",
         children: [
           { label: "React", value: "react", checked: false, icon: "react" },
           { label: "Next", value: "next", checked: false, icon: "next" },
@@ -35,6 +38,7 @@ export const dependencies: DependencyOrCategory[] = [
       {
         label: "Styles",
         collapsible: true,
+        icon:"styles-icon",
         children: [
           {
             label: "Tailwind CSS",
@@ -65,6 +69,7 @@ export const dependencies: DependencyOrCategory[] = [
       {
         label: "Other Libraries",
         collapsible: true,
+        icon: "other-icon",
         children: [
           {
             label: "Axios",
@@ -89,7 +94,7 @@ export const dependencies: DependencyOrCategory[] = [
             label: "React Hook Form",
             value: "reactHookForm",
             checked: false,
-            icon: "reactHookForm-icon",
+            icon: "react-hook-form-icon",
           },
         ],
       },

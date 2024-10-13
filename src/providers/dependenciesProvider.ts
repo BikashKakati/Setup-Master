@@ -67,7 +67,7 @@ export class DependenciesProvider
     } else if (element.iconPath) {
       element.iconPath = this.getIconPath(element.iconPath.toString());
     } else {
-      // element.iconPath = new vscode.ThemeIcon("circle-outline");
+      element.iconPath = this.getIconPath("not-found-icon");
     }
     return element;
   }
@@ -83,7 +83,7 @@ export class DependenciesProvider
               undefined,
               undefined,
               false,
-              undefined,
+              depOrCat.icon,
               vscode.TreeItemCollapsibleState.Collapsed // Categories are collapsible
             );
           } else {
@@ -117,7 +117,7 @@ export class DependenciesProvider
                 undefined,
                 undefined,
                 false,
-                undefined,
+                child.icon,
                 vscode.TreeItemCollapsibleState.Collapsed // Subcategories are also collapsible
               );
             } else {
