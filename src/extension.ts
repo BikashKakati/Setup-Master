@@ -1,4 +1,4 @@
-import { registerInstallCommand } from "./commands/installCommands";
+import { registerInstallCommand } from "./commands/registerCommands";
 import { dependencies } from "./constants";
 import { DependenciesProvider } from "./providers/dependenciesProvider";
 import * as vscode from "vscode";
