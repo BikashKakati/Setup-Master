@@ -1,16 +1,16 @@
 import * as vscode from "vscode";
 import { DependencyInstaller } from "../installers/dependencyInstaller";
-import { FrameworkInstaller } from "../installers/FrameworkInstaller";
-import { ReduxInstaller } from "../installers/reduxInstaller";
-import { axiosInstaller } from "../installers/axiosInstaller";
-import { tailwindInstaller } from "../installers/tailwindInstaller";
-import { ShadcnInstaller } from "../installers/shadcnInstaller";
-import { zodInstaller } from "../installers/zodInstaller";
-import { reactHookFormInstaller } from "../installers/reactHookFormInstaller";
-import { zustandInstaller } from "../installers/zustandInstaller";
-import { reactRouterInstaller } from "../installers/reactRouterInstaller";
-import { reactQueryInstaller } from "../installers/rectQueryinstaller";
-import { jotaiInstaller } from "../installers/jotaiInstaller";
+import { FrameworkInstaller } from "../installers/frontend/FrameworkInstaller";
+import { ReduxInstaller } from "../installers/frontend/reduxInstaller";
+import { axiosInstaller } from "../installers/common/axiosInstaller";
+import { tailwindInstaller } from "../installers/frontend/tailwindInstaller";
+import { ShadcnInstaller } from "../installers/frontend/shadcnInstaller";
+import { zodInstaller } from "../installers/frontend/zodInstaller";
+import { reactHookFormInstaller } from "../installers/frontend/reactHookFormInstaller";
+import { zustandInstaller } from "../installers/frontend/zustandInstaller";
+import { reactRouterInstaller } from "../installers/frontend/reactRouterInstaller";
+import { reactQueryInstaller } from "../installers/frontend/rectQueryinstaller";
+import { jotaiInstaller } from "../installers/frontend/jotaiInstaller";
 
 export function getInstaller(
   selectedDependencies: string[],

@@ -113,6 +113,72 @@ export const dependencies: DependencyOrCategory[] = [
       },
     ],
   },
+  {
+    label:"Backend",
+    icon:"backend-icon",
+    collapsible:true,
+    children: [
+      {
+        label: "Language",
+        collapsible: true,
+        icon: "language-icon",
+        children: [
+          {
+            label: "JavaScript",
+            value: "js",
+            checked: false,
+            icon: "javascript",
+          },
+          {
+            label: "TypeScript",
+            value: "ts",
+            checked: false,
+            icon: "typescript",
+          },
+        ],
+      },
+      {
+        label: "Framework",
+        collapsible: true,
+        icon: "framework-icon",
+        children: [
+          { label: "Express", value: "express", checked: false, icon: "express-icon" },
+        ],
+      },
+      
+      {
+        label: "Other Library",
+        collapsible: true,
+        icon: "other-icon",
+        children: [
+          {
+            label: "Nodemon",
+            value: "nodemon",
+            checked: false,
+            icon: "nodemon-icon",
+          },
+          {
+            label: "Axios",
+            value: "axios",
+            checked: false,
+            icon: "axios-icon",
+          },
+          {
+            label: "Json Web Token",
+            value: "jwt",
+            checked: false,
+            icon: "jwt-icon",
+          },
+          {
+            label: "Cors",
+            value: "cors",
+            checked: false,
+            icon: "cors-icon",
+          },
+        ],
+      },
+    ],
+  }
 ];
 export const onlyOneSelectCategoriesList: string[] = [
   "Frameworks",

@@ -18,12 +18,6 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-    "viewsWelcome": [
-      {
-        "view": "installerDependencies",
-        "contents": "[Install Dependencies](command:installerDependencies.installSelectedDependencies)"
-      }
-    ],
     "viewsContainers": {
       "activitybar": [
         {
