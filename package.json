@@ -11,19 +11,13 @@
   "engines": {
     "vscode": "^1.94.0"
   },
-  "icon": "assets/download.svg",
+  "icon": "assets/download-light.svg",
   "categories": [
     "Other"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-    "viewsWelcome": [
-      {
-        "view": "installerDependencies", 
-        "contents": "[Install Dependencies](command:installerDependencies.installSelectedDependencies)"
-      }
-    ],
     "viewsContainers": {
       "activitybar": [
         {
