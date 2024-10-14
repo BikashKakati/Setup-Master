@@ -74,6 +74,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "State Management",
+        value:"frontend-state-management",
         collapsible: true,
         icon: "ui-libraries-icon",
         children: [
@@ -99,6 +100,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Icons",
+        value:"frontend-icons",
         collapsible: true,
         icon: "Icons-icon",
         children: [
@@ -118,6 +120,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Charts",
+        value:"frontend-charts",
         collapsible: true,
         icon: "charts-icon",
         children: [
@@ -137,6 +140,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Notification",
+        value:"frontend-notification",
         collapsible: true,
         icon: "notification-icon",
         children: [
@@ -156,6 +160,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Animation",
+        value:"frontend-animation",
         collapsible: true,
         icon: "animation-icon",
         children: [
@@ -219,9 +224,6 @@ export const dependencies: DependencyOrCategory[] = [
     value:"backend",
     icon:"backend-icon",
     collapsible:true,
-    label: "Backend",
-    icon: "backend-icon",
-    collapsible: true,
     children: [
       {
         label: "Languages",
