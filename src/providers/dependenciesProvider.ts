@@ -275,6 +275,7 @@ export class DependenciesProvider
           });
         }
       });
+      this.selectedDependencies.push("tailwind");
       vscode.window.showInformationMessage(`tailwind selected.`);
     }
     dep.checked = !dep.checked;
