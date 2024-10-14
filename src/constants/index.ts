@@ -4,12 +4,12 @@ export const dependencies: DependencyOrCategory[] = [
   {
     label: "Frontend",
     collapsible: true,
-    icon:"frontend-icon",
+    icon: "frontend-icon",
     children: [
       {
         label: "Languages",
         collapsible: true,
-        icon:"language-icon",
+        icon: "language-icon",
         children: [
           {
             label: "JavaScript",
@@ -28,7 +28,7 @@ export const dependencies: DependencyOrCategory[] = [
       {
         label: "Frameworks",
         collapsible: true,
-        icon:"framework-icon",
+        icon: "framework-icon",
         children: [
           { label: "React", value: "react", checked: false, icon: "react" },
           { label: "Next", value: "next", checked: false, icon: "next" },
@@ -38,7 +38,7 @@ export const dependencies: DependencyOrCategory[] = [
       {
         label: "Styles",
         collapsible: true,
-        icon:"styles-icon",
+        icon: "styles-icon",
         children: [
           {
             label: "Tailwind CSS",
@@ -57,7 +57,7 @@ export const dependencies: DependencyOrCategory[] = [
       {
         label: "UI Libraries",
         collapsible: true,
-        icon:"ui-libraries-icon",
+        icon: "ui-libraries-icon",
         children: [
           {
             label: "Shadcn",
@@ -83,6 +83,18 @@ export const dependencies: DependencyOrCategory[] = [
             value: "redux",
             checked: false,
             icon: "redux-icon",
+          },
+          {
+            label: "React Query",
+            value: "reactQuery",
+            checked: false,
+            icon: "react-query-icon",
+          },
+          {
+            label: "Jotai",
+            value: "jotai",
+            checked: false,
+            icon: "jotai-icon",
           },
           { label: "Zod", value: "zod", checked: false, icon: "zod-icon" },
           {

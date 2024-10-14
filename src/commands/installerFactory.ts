@@ -9,6 +9,8 @@ import { zodInstaller } from "../installers/zodInstaller";
 import { reactHookFormInstaller } from "../installers/reactHookFormInstaller";
 import { zustandInstaller } from "../installers/zustandInstaller";
 import { reactRouterInstaller } from "../installers/reactRouterInstaller";
+import { reactQueryInstaller } from "../installers/rectQueryinstaller";
+import { jotaiInstaller } from "../installers/jotaiInstaller";
 
 export function getInstaller(
   selectedDependencies: string[],
@@ -37,6 +39,10 @@ export function getInstaller(
       return new reactRouterInstaller(terminal, workspaceRoot);
     case "reactHookForm":
       return new reactHookFormInstaller(terminal, workspaceRoot);
+    case "reactQuery":
+      return new reactQueryInstaller(terminal, workspaceRoot);
+    case "jotai":
+      return new jotaiInstaller(terminal, workspaceRoot);
     case "tailwind":
       return new tailwindInstaller(
         terminal,
