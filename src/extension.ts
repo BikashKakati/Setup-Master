@@ -5,6 +5,7 @@ import * as vscode from "vscode";
 
 export function activate(context: vscode.ExtensionContext) {
   const dependenciesProvider = new DependenciesProvider(context, dependencies);
+
   // Register the install command
   registerInstallCommand(context, dependenciesProvider);
 }

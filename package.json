@@ -15,7 +15,9 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onView:installerDependencies"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "viewsContainers": {
