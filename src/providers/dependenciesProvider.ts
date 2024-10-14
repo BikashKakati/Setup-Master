@@ -35,7 +35,6 @@ export class DependenciesProvider
   private searchQuery: string | undefined;
   searchActive: boolean = false; // Tracks whether the search is active
 
-
   constructor(
     private context: vscode.ExtensionContext,
     dependencies: DependencyOrCategory[]
@@ -73,7 +72,6 @@ export class DependenciesProvider
   }
 
   getTreeItem(element: DependencyItem): vscode.TreeItem {
-
     if (element.checked) {
       element.iconPath = new vscode.ThemeIcon("check");
     } else if (element.iconPath) {
@@ -115,12 +113,11 @@ export class DependenciesProvider
           }
         });
 
-        if(this.searchQuery){
-          const searchResult = this.searchDependencies(this.searchQuery);
-          return Promise.resolve([...searchResult, ...dependencyItem]);
-        }
-        return Promise.resolve(dependencyItem);
-
+      if (this.searchQuery) {
+        const searchResult = this.searchDependencies(this.searchQuery);
+        return Promise.resolve([...searchResult, ...dependencyItem]);
+      }
+      return Promise.resolve(dependencyItem);
     } else {
       // Find the corresponding category for the selected element
       const category = this.findCategoryByLabel(
@@ -184,7 +181,7 @@ export class DependenciesProvider
               child,
             ]);
             if (foundInNestedCategory) {
-              return foundInNestedCategory; 
+              return foundInNestedCategory;
             }
           }
         }
@@ -195,10 +192,10 @@ export class DependenciesProvider
   }
   getAllDependencies(): DependencyItem[] {
     const allDependencies: DependencyItem[] = [];
-  
+
     const traverseDependencies = (deps: DependencyOrCategory[]) => {
-      deps.forEach(depOrCat => {
-        if ('children' in depOrCat) {
+      deps.forEach((depOrCat) => {
+        if ("children" in depOrCat) {
           // If it's a category, continue traversing
           traverseDependencies(depOrCat.children);
         } else {
@@ -220,26 +217,24 @@ export class DependenciesProvider
         }
       });
     };
-  
+
     traverseDependencies(this.dependencies);
     return allDependencies;
   }
 
   searchDependencies(query: string): DependencyItem[] {
     const allDependencies = this.getAllDependencies();
-    
+
     if (!query) {
       return allDependencies;
     }
-  
-    const filteredDependencies = allDependencies.filter(depItem =>
+
+    const filteredDependencies = allDependencies.filter((depItem) =>
       depItem.label.toLowerCase().includes(query.toLowerCase())
     );
 
     return filteredDependencies;
   }
-  
-  
 
   // Toggle the selection (check/uncheck) of a dependency
   toggleDependency(dep: Dependency) {
@@ -287,6 +282,7 @@ export class DependenciesProvider
           });
         }
       });
+      this.selectedDependencies.push("tailwind");
       vscode.window.showInformationMessage(`tailwind selected.`);
     }
     dep.checked = !dep.checked;

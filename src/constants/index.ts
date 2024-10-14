@@ -73,6 +73,107 @@ export const dependencies: DependencyOrCategory[] = [
         ],
       },
       {
+        label: "State Management",
+        collapsible: true,
+        icon: "ui-libraries-icon",
+        children: [
+          {
+            label: "Redux",
+            value: "redux",
+            checked: false,
+            icon: "redux-icon",
+          },
+          {
+            label: "Jotai",
+            value: "jotai",
+            checked: false,
+            icon: "jotai-icon",
+          },
+          {
+            label: "Zustand",
+            value: "zustand",
+            checked: false,
+            icon: "zustand-icon",
+          },
+        ],
+      },
+      {
+        label: "Icons",
+        collapsible: true,
+        icon: "Icons-icon",
+        children: [
+          {
+            label: "Lucide Icons",
+            value: "lucideIcons",
+            checked: false,
+            icon: "lucide-icon",
+          },
+          {
+            label: "React Icons",
+            value: "reactIcons",
+            checked: false,
+            icon: "react-icon-icon",
+          },
+        ],
+      },
+      {
+        label: "Charts",
+        collapsible: true,
+        icon: "charts-icon",
+        children: [
+          {
+            label: "Chart.js",
+            value: "chartjs",
+            checked: false,
+            icon: "chartjs-icon",
+          },
+          {
+            label: "Recharts Icons",
+            value: "recharts",
+            checked: false,
+            icon: "recharts-icon",
+          },
+        ],
+      },
+      {
+        label: "Notification",
+        collapsible: true,
+        icon: "notification-icon",
+        children: [
+          {
+            label: "React toastify",
+            value: "rectToastify",
+            checked: false,
+            icon: "chartjs-icon",
+          },
+          {
+            label: "React Hot Toast",
+            value: "reactHotToast",
+            checked: false,
+            icon: "react-hot-toast-icon",
+          },
+        ],
+      },
+      {
+        label: "Animation",
+        collapsible: true,
+        icon: "animation-icon",
+        children: [
+          {
+            label: "Framer Motion",
+            value: "framerMotion",
+            checked: false,
+            icon: "framer-motion-icon",
+          },
+          {
+            label: "Gsap",
+            value: "gsap",
+            checked: false,
+            icon: "gsap-icon",
+          },
+        ],
+      },
+      {
         label: "Other Libraries",
         value:"frontend-other-libraries",
         collapsible: true,
@@ -85,29 +186,23 @@ export const dependencies: DependencyOrCategory[] = [
             icon: "axios-icon",
           },
           {
-            label: "Redux",
-            value: "redux",
-            checked: false,
-            icon: "redux-icon",
-          },
-          {
             label: "React Query",
             value: "reactQuery",
             checked: false,
             icon: "react-query-icon",
           },
-          {
-            label: "Jotai",
-            value: "jotai",
-            checked: false,
-            icon: "jotai-icon",
-          },
           { label: "Zod", value: "zod", checked: false, icon: "zod-icon" },
           {
-            label: "Zustand",
-            value: "zustand",
+            label: "React Datatable Component",
+            value: "reactDatatableComponent",
             checked: false,
-            icon: "zustand-icon",
+            icon: "react-data-table-component-icon",
+          },
+          {
+            label: "Momentjs",
+            value: "moment",
+            checked: false,
+            icon: "moment-icon",
           },
           {
             label: "React Hook Form",
@@ -124,6 +219,9 @@ export const dependencies: DependencyOrCategory[] = [
     value:"backend",
     icon:"backend-icon",
     collapsible:true,
+    label: "Backend",
+    icon: "backend-icon",
+    collapsible: true,
     children: [
       {
         label: "Languages",
@@ -151,10 +249,15 @@ export const dependencies: DependencyOrCategory[] = [
         collapsible: true,
         icon: "framework-icon",
         children: [
-          { label: "Express", value: "express", checked: false, icon: "express-icon" },
+          {
+            label: "Express",
+            value: "express",
+            checked: false,
+            icon: "express-icon",
+          },
         ],
       },
-      
+
       {
         label: "Other Library",
         value:"backend-other-libraries",
@@ -188,7 +291,7 @@ export const dependencies: DependencyOrCategory[] = [
         ],
       },
     ],
-  }
+  },
 ];
 export const onlyOneSelectCategoriesList: string[] = [
   "Frameworks",
