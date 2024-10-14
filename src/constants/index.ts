@@ -3,11 +3,13 @@ import { DependencyOrCategory } from "../types";
 export const dependencies: DependencyOrCategory[] = [
   {
     label: "Frontend",
+    value:"frontend",
     collapsible: true,
     icon: "frontend-icon",
     children: [
       {
         label: "Languages",
+        value:"frontend-languages",
         collapsible: true,
         icon: "language-icon",
         children: [
@@ -27,6 +29,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Frameworks",
+        value:"frontend-frameworks",
         collapsible: true,
         icon: "framework-icon",
         children: [
@@ -37,6 +40,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Styles",
+        value:"frontend-styles",
         collapsible: true,
         icon: "styles-icon",
         children: [
@@ -56,6 +60,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "UI Libraries",
+        value:"frontend-ui-libraries",
         collapsible: true,
         icon: "ui-libraries-icon",
         children: [
@@ -69,6 +74,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Other Libraries",
+        value:"frontend-other-libraries",
         collapsible: true,
         icon: "other-icon",
         children: [
@@ -115,11 +121,13 @@ export const dependencies: DependencyOrCategory[] = [
   },
   {
     label:"Backend",
+    value:"backend",
     icon:"backend-icon",
     collapsible:true,
     children: [
       {
-        label: "Language",
+        label: "Languages",
+        value:"backend-languages",
         collapsible: true,
         icon: "language-icon",
         children: [
@@ -138,7 +146,8 @@ export const dependencies: DependencyOrCategory[] = [
         ],
       },
       {
-        label: "Framework",
+        label: "Frameworks",
+        value:"backend-frameworks",
         collapsible: true,
         icon: "framework-icon",
         children: [
@@ -148,6 +157,7 @@ export const dependencies: DependencyOrCategory[] = [
       
       {
         label: "Other Library",
+        value:"backend-other-libraries",
         collapsible: true,
         icon: "other-icon",
         children: [
