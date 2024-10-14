@@ -7,17 +7,23 @@
     "type": "git",
     "url": "https://github.com/swapnilchougule00/vs-code-extension-installer.git"
   },
-  "version": "0.0.2",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.94.0"
   },
-  "icon": "assets/download-light.svg",
+  "icon": "assets/Setup-master-Icon.png",
   "categories": [
     "Other"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsWelcome": [
+      {
+        "view": "installerDependencies",
+        "contents": "[Install Dependencies](command:installerDependencies.installSelectedDependencies)"
+      }
+    ],
     "viewsContainers": {
       "activitybar": [
         {
@@ -27,7 +33,6 @@
         }
       ]
     },
-
     "views": {
       "installerView": [
         {
@@ -44,9 +49,9 @@
       {
         "command": "installerDependencies.installSelectedDependencies",
         "title": "Install All Selected Dependencies",
-        "icon":{
+        "icon": {
           "light": "assets/download-light.svg",
-          "dark":  "assets/download-dark.svg"
+          "dark": "assets/download-dark.svg"
         }
       },
       {

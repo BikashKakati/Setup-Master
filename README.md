@@ -1,5 +1,3 @@
-Testing
-
 # Setup Master
 
 Setup Master is a VS Code extension designed to simplify the process of setting up new projects by allowing developers to easily install dependencies with just a few clicks. Instead of manually entering installation commands, this extension streamlines the workflow by enabling users to select the libraries and frameworks they need, making project setup quicker and more efficient.
@@ -24,7 +22,7 @@ Setup Master is a VS Code extension designed to simplify the process of setting 
 2. Type `Setup Master` to see available commands.
 3. Select `Select Dependencies` to open the dependency selection view.
 4. Choose the libraries you want to install.
-5. Run the command to install all selected dependencies.
+5. Click on install to install all selected dependencies.
 
 ## Dependencies
 

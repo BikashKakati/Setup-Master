@@ -162,7 +162,6 @@ export class DependenciesProvider
     dep: Dependency,
     currentCategories: Category[]
   ): Category | undefined {
-    console.log("currentcat", currentCategories);
     for (const category of currentCategories) {
       if ("children" in category) {
         // Check if the dependency is directly in this category's children
@@ -243,8 +242,6 @@ export class DependenciesProvider
       dep,
       this.dependencies as Category[]
     );
-
-    console.log(this.dependencies);
 
     if (
       nearestParentCategory &&
