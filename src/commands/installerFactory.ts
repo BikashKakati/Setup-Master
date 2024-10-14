@@ -21,6 +21,7 @@ import { FramerMotionInstaller } from "../installers/frontend/FramerMotionInstal
 import { GsapInstaller } from "../installers/frontend/GsapInstaller";
 import { ReactDatatableComponentInstaller } from "../installers/frontend/ReactDatatableComponentInstaller";
 import { MomentJsInstaller } from "../installers/common/MomentJsInstaller";
+import { ExpressInstaller } from "../installers/backend/frameworks/expressInstaller";
 
 export function getInstaller(
   selectedDependencies: string[],
@@ -90,6 +91,9 @@ export function getInstaller(
 
     case "moment":
       return new MomentJsInstaller(terminal, workspaceRoot);
+    //backend
+    case "express":
+      return new ExpressInstaller(terminal, workspaceRoot, selectedDependencies);
     default:
       return null;
   }

@@ -233,13 +233,13 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "JavaScript",
-            value: "js",
+            value: "back-js",
             checked: false,
             icon: "javascript",
           },
           {
             label: "TypeScript",
-            value: "ts",
+            value: "back-ts",
             checked: false,
             icon: "typescript",
           },
