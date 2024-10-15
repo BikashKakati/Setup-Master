@@ -34,7 +34,6 @@ export class DependenciesProvider
   private searchQuery: string | undefined;
   searchActive: boolean = false; // Tracks whether the search is active
 
-
   constructor(
     private context: vscode.ExtensionContext,
     dependencies: DependencyOrCategory[]
@@ -72,7 +71,6 @@ export class DependenciesProvider
   }
 
   getTreeItem(element: DependencyItem): vscode.TreeItem {
-
     if (element.checked) {
       element.iconPath = new vscode.ThemeIcon("check");
     } else if (element.iconPath) {
@@ -85,39 +83,37 @@ export class DependenciesProvider
 
   getChildren(element?: DependencyItem): Thenable<DependencyItem[]> {
     if (!element) {
-      
-        const dependencyItem = this.dependencies.map((depOrCat) => {
-          if ("collapsible" in depOrCat) {
-            // It's a category
-            return new DependencyItem(
-              depOrCat.label,
-              undefined,
-              undefined,
-              false,
-              depOrCat.icon,
-              vscode.TreeItemCollapsibleState.Collapsed // Categories are collapsible
-            );
-          } else {
-            return new DependencyItem(
-              depOrCat.label,
-              undefined,
-              {
-                command: "installerDependencies.toggleDependency",
-                title: "Select",
-                arguments: [depOrCat],
-              },
-              depOrCat.checked,
-              depOrCat.icon
-            );
-          }
-        });
-
-        if(this.searchQuery){
-          const searchResult = this.searchDependencies(this.searchQuery);
-          return Promise.resolve([...searchResult, ...dependencyItem]);
+      const dependencyItem = this.dependencies.map((depOrCat) => {
+        if ("collapsible" in depOrCat) {
+          // It's a category
+          return new DependencyItem(
+            depOrCat.label,
+            undefined,
+            undefined,
+            false,
+            depOrCat.icon,
+            vscode.TreeItemCollapsibleState.Collapsed // Categories are collapsible
+          );
+        } else {
+          return new DependencyItem(
+            depOrCat.label,
+            undefined,
+            {
+              command: "installerDependencies.toggleDependency",
+              title: "Select",
+              arguments: [depOrCat],
+            },
+            depOrCat.checked,
+            depOrCat.icon
+          );
         }
-        return Promise.resolve(dependencyItem);
+      });
 
+      if (this.searchQuery) {
+        const searchResult = this.searchDependencies(this.searchQuery);
+        return Promise.resolve([...searchResult, ...dependencyItem]);
+      }
+      return Promise.resolve(dependencyItem);
     } else {
       // Find the corresponding category for the selected element
       const category = this.findCategoryByLabel(
@@ -179,7 +175,7 @@ export class DependenciesProvider
               child,
             ]);
             if (foundInNestedCategory) {
-              return foundInNestedCategory; 
+              return foundInNestedCategory;
             }
           }
         }
@@ -190,10 +186,10 @@ export class DependenciesProvider
   }
   getAllDependencies(): DependencyItem[] {
     const allDependencies: DependencyItem[] = [];
-  
+
     const traverseDependencies = (deps: DependencyOrCategory[]) => {
-      deps.forEach(depOrCat => {
-        if ('children' in depOrCat) {
+      deps.forEach((depOrCat) => {
+        if ("children" in depOrCat) {
           // If it's a category, continue traversing
           traverseDependencies(depOrCat.children);
         } else {
@@ -214,26 +210,24 @@ export class DependenciesProvider
         }
       });
     };
-  
+
     traverseDependencies(this.dependencies);
     return allDependencies;
   }
 
   searchDependencies(query: string): DependencyItem[] {
     const allDependencies = this.getAllDependencies();
-    
+
     if (!query) {
       return allDependencies;
     }
-  
-    const filteredDependencies = allDependencies.filter(depItem =>
+
+    const filteredDependencies = allDependencies.filter((depItem) =>
       depItem.label.toLowerCase().includes(query.toLowerCase())
     );
 
     return filteredDependencies;
   }
-  
-  
 
   // Toggle the selection (check/uncheck) of a dependency
   toggleDependency(dep: Dependency) {
@@ -281,6 +275,7 @@ export class DependenciesProvider
           });
         }
       });
+      this.selectedDependencies.push("tailwind");
       vscode.window.showInformationMessage(`tailwind selected.`);
     }
     dep.checked = !dep.checked;
@@ -306,15 +301,27 @@ export class DependenciesProvider
 
   // Clear selected dependencies
   clearSelectedDependencies() {
-    this.selectedDependencies = [];
-    this.dependencies.forEach((dep) => {
-      if (!("collapsible" in dep)) {
-        dep.checked = false;
-      }
+    this.selectedDependencies.forEach((dep) => {
+      vscode.window.showInformationMessage(`${dep} Installing `);
     });
+
+    this.selectedDependencies = [];
+    function uncheckDependencies(dependencies: DependencyOrCategory[]) {
+      dependencies.forEach((depOrCat) => {
+        if ("children" in depOrCat) {
+          // If the current item has children, recurse through its children
+          uncheckDependencies(depOrCat.children);
+        } else if (!("children" in depOrCat)) {
+          // If the item has a value, it is a dependency, so uncheck it
+          depOrCat.checked = false;
+        }
+      });
+    }
+
+    // Usage of the recursive function
+    uncheckDependencies(this.dependencies);
     this.refresh();
   }
-
   // Helper function to get the icon path
   getIconPath(iconName: string): vscode.Uri | vscode.ThemeIcon {
     const assetPath = path.join(this.context.extensionPath, "assets");

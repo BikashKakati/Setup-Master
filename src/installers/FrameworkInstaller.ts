@@ -60,7 +60,7 @@ export class FrameworkInstaller extends DependencyInstaller {
 
       const nextCommand = `npx create-next-app@latest ${uniqueAppName} ${
         dependencyArray.includes("ts") ? "--typescript" : "--javascript"
-      } --no-tailwind --eslint --src-dir --app 
+      } --no-tailwind --eslint --src-dir --app --import-alias '@/*' --yes
 `;
       this.runCommand(nextCommand);
       this.runCommand(`cd ${uniqueAppName}`);
