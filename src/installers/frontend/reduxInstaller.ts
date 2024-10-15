@@ -1,9 +1,9 @@
-import { DependencyInstaller } from "./dependencyInstaller";
+import { DependencyInstaller } from "../dependencyInstaller";
 import * as vscode from "vscode";
 
 export class ReduxInstaller extends DependencyInstaller {
   install() {
-    this.runCommand("npm install redux react-redux");
+    this.runCommand("npm install react-redux @reduxjs/toolkit");
     vscode.window.showInformationMessage("Redux installed successfully!");
   }
 }
