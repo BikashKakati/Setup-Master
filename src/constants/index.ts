@@ -68,6 +68,31 @@ export const dependencies: DependencyOrCategory[] = [
         ],
       },
       {
+        label: "State Management",
+        collapsible: true,
+        icon: "state-management-icon",
+        children: [
+          {
+            label: "Zustand",
+            value: "zustand",
+            checked: false,
+            icon: "zustand-icon",
+          },
+          {
+            label: "Jotai",
+            value: "jotai",
+            checked: false,
+            icon: "jotai-icon",
+          },
+          {
+            label: "Redux",
+            value: "redux",
+            checked: false,
+            icon: "redux-icon",
+          },
+        ],
+      },
+      {
         label: "Other Libraries",
         collapsible: true,
         icon: "other-icon",
@@ -79,30 +104,13 @@ export const dependencies: DependencyOrCategory[] = [
             icon: "axios-icon",
           },
           {
-            label: "Redux",
-            value: "redux",
-            checked: false,
-            icon: "redux-icon",
-          },
-          {
             label: "React Query",
             value: "reactQuery",
             checked: false,
             icon: "react-query-icon",
           },
-          {
-            label: "Jotai",
-            value: "jotai",
-            checked: false,
-            icon: "jotai-icon",
-          },
+         
           { label: "Zod", value: "zod", checked: false, icon: "zod-icon" },
-          {
-            label: "Zustand",
-            value: "zustand",
-            checked: false,
-            icon: "zustand-icon",
-          },
           {
             label: "React Hook Form",
             value: "reactHookForm",
@@ -118,5 +126,6 @@ export const onlyOneSelectCategoriesList: string[] = [
   "Frameworks",
   "Styles",
   "Languages",
+  "State Management"
 ];
 export const topDependenciesList: string[] = ["react", "vite", "next"];
