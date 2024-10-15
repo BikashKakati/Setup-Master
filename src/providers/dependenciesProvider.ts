@@ -6,6 +6,7 @@ import { Category, Dependency, DependencyOrCategory } from "../types";
 export class DependencyItem extends vscode.TreeItem {
   constructor(
     public readonly label: string,
+    public readonly value: string,
     public readonly description?: string,
     public readonly command?: vscode.Command,
     public checked: boolean = false,
@@ -43,14 +44,14 @@ export class DependenciesProvider
 
   private findCategoryByLabel(
     categories: DependencyOrCategory[],
-    label: string
+    value: string
   ): Category | undefined {
     for (const cat of categories) {
-      if (cat.label === label && "children" in cat) {
+      if (cat.value === value && "children" in cat) {
         return cat as Category;
       }
       if ("children" in cat) {
-        const found = this.findCategoryByLabel(cat.children, label);
+        const found = this.findCategoryByLabel(cat.children, value);
         if (found) {
           return found;
         }
@@ -83,31 +84,34 @@ export class DependenciesProvider
 
   getChildren(element?: DependencyItem): Thenable<DependencyItem[]> {
     if (!element) {
-      const dependencyItem = this.dependencies.map((depOrCat) => {
-        if ("collapsible" in depOrCat) {
-          // It's a category
-          return new DependencyItem(
-            depOrCat.label,
-            undefined,
-            undefined,
-            false,
-            depOrCat.icon,
-            vscode.TreeItemCollapsibleState.Collapsed // Categories are collapsible
-          );
-        } else {
-          return new DependencyItem(
-            depOrCat.label,
-            undefined,
-            {
-              command: "installerDependencies.toggleDependency",
-              title: "Select",
-              arguments: [depOrCat],
-            },
-            depOrCat.checked,
-            depOrCat.icon
-          );
-        }
-      });
+      
+        const dependencyItem = this.dependencies.map((depOrCat) => {
+          if ("collapsible" in depOrCat) {
+            // It's a category
+            return new DependencyItem(
+              depOrCat.label,
+              depOrCat.value,
+              undefined,
+              undefined,
+              false,
+              depOrCat.icon,
+              vscode.TreeItemCollapsibleState.Collapsed // Categories are collapsible
+            );
+          } else {
+            return new DependencyItem(
+              depOrCat.label,
+              depOrCat.value,
+              undefined,
+              {
+                command: "installerDependencies.toggleDependency",
+                title: "Select",
+                arguments: [depOrCat],
+              },
+              depOrCat.checked,
+              depOrCat.icon
+            );
+          }
+        });
 
       if (this.searchQuery) {
         const searchResult = this.searchDependencies(this.searchQuery);
@@ -118,7 +122,7 @@ export class DependenciesProvider
       // Find the corresponding category for the selected element
       const category = this.findCategoryByLabel(
         this.dependencies,
-        element.label
+        element.value
       );
 
       if (category && category.children) {
@@ -127,6 +131,7 @@ export class DependenciesProvider
             if ("collapsible" in child) {
               return new DependencyItem(
                 child.label,
+                child.value,
                 undefined,
                 undefined,
                 false,
@@ -136,6 +141,7 @@ export class DependenciesProvider
             } else {
               return new DependencyItem(
                 child.label,
+                child.value,
                 undefined,
                 {
                   command: "installerDependencies.toggleDependency",
@@ -162,7 +168,7 @@ export class DependenciesProvider
       if ("children" in category) {
         // Check if the dependency is directly in this category's children
         const foundInChildren = category.children.some(
-          (child) => child.label === dep.label
+          (child) => child.value === dep.value
         );
         if (foundInChildren) {
           return category; // Return the current category if the dependency is found
@@ -197,6 +203,7 @@ export class DependenciesProvider
           allDependencies.push(
             new DependencyItem(
               depOrCat.label,
+              depOrCat.value,
               undefined,
               {
                 command: "installerDependencies.toggleDependency",
@@ -264,7 +271,7 @@ export class DependenciesProvider
               subcategory.children.forEach(
                 (dependency: DependencyOrCategory) => {
                   if (
-                    "value" in dependency &&
+                    !("children" in dependency) &&
                     dependency.value === "tailwind"
                   ) {
                     dependency.checked = true;

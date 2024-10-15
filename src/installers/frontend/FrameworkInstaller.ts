@@ -1,37 +1,10 @@
-import { DependencyInstaller } from "./dependencyInstaller";
 import * as fs from "fs";
-import * as path from "path";
 import * as vscode from "vscode";
+import { DependencyInstaller } from "../dependencyInstaller";
 
 export class FrameworkInstaller extends DependencyInstaller {
   baseAppName = "my-project";
-  private getUniqueAppDirectory(appName: string): string {
-    let counter = 1;
-    let fileName = appName;
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-
-    if (!workspaceFolders || workspaceFolders.length === 0) {
-      vscode.window.showErrorMessage("No workspace folder is open.");
-      return "";
-    }
-
-    const workspacePath = workspaceFolders[0].uri.fsPath;
-
-    const getDirectories = (source: any = workspacePath) =>
-      fs
-        .readdirSync(source, { withFileTypes: true })
-        .filter((dirent) => dirent.isDirectory())
-        .map((dirent) => dirent.name);
-
-    const currentWorkspaceFolders = getDirectories();
-
-    while (currentWorkspaceFolders.includes(fileName)) {
-      fileName = `${appName}-${counter}`;
-      counter++;
-    }
-
-    return fileName;
-  }
+ 
 
   install() {
     const dependencyArray = this.selectedDependencies;

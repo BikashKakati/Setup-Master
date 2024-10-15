@@ -1,5 +1,5 @@
 {
-  "name": "SetUp-Master",
+  "name": "setup-master",
   "displayName": "Setup Master",
   "publisher": "SetupMaster",
   "description": "Instantly set up projects by selecting and installing dependencies effortlessly",
@@ -18,23 +18,17 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-    "viewsWelcome": [
-      {
-        "view": "installerDependencies",
-        "contents": "[Install Dependencies](command:installerDependencies.installSelectedDependencies)"
-      }
-    ],
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "installerView",
+          "id": "setup-master",
           "title": "Setup Master",
           "icon": "assets/download-light.svg"
         }
       ]
     },
     "views": {
-      "installerView": [
+      "setup-master": [
         {
           "id": "installerDependencies",
           "name": "Dependencies"

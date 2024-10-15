@@ -1,16 +1,27 @@
 import * as vscode from "vscode";
 import { DependencyInstaller } from "../installers/dependencyInstaller";
-import { FrameworkInstaller } from "../installers/FrameworkInstaller";
-import { ReduxInstaller } from "../installers/reduxInstaller";
-import { axiosInstaller } from "../installers/axiosInstaller";
-import { tailwindInstaller } from "../installers/tailwindInstaller";
-import { ShadcnInstaller } from "../installers/shadcnInstaller";
-import { zodInstaller } from "../installers/zodInstaller";
-import { reactHookFormInstaller } from "../installers/reactHookFormInstaller";
-import { zustandInstaller } from "../installers/zustandInstaller";
-import { reactRouterInstaller } from "../installers/reactRouterInstaller";
-import { reactQueryInstaller } from "../installers/rectQueryinstaller";
-import { jotaiInstaller } from "../installers/jotaiInstaller";
+import { FrameworkInstaller } from "../installers/frontend/FrameworkInstaller";
+import { ReduxInstaller } from "../installers/frontend/reduxInstaller";
+import { axiosInstaller } from "../installers/common/axiosInstaller";
+import { tailwindInstaller } from "../installers/frontend/tailwindInstaller";
+import { ShadcnInstaller } from "../installers/frontend/shadcnInstaller";
+import { zodInstaller } from "../installers/frontend/zodInstaller";
+import { reactHookFormInstaller } from "../installers/frontend/reactHookFormInstaller";
+import { zustandInstaller } from "../installers/frontend/zustandInstaller";
+import { reactRouterInstaller } from "../installers/frontend/reactRouterInstaller";
+import { reactQueryInstaller } from "../installers/frontend/rectQueryinstaller";
+import { jotaiInstaller } from "../installers/frontend/jotaiInstaller";
+import { LucideIconsInstaller } from "../installers/frontend/LucideIconsInstaller";
+import { ReactIconsInstaller } from "../installers/frontend/ReactIconsInstaller";
+import { ChartJsInstaller } from "../installers/frontend/ChartJsInstaller";
+import { RechartInstaller } from "../installers/frontend/RechartInstaller";
+import { ReactToastifyInstaller } from "../installers/frontend/ReactToastifyInstaller";
+import { ReactHotToastInstaller } from "../installers/frontend/ReactHotToastInstaller";
+import { FramerMotionInstaller } from "../installers/frontend/FramerMotionInstaller";
+import { GsapInstaller } from "../installers/frontend/GsapInstaller";
+import { ReactDatatableComponentInstaller } from "../installers/frontend/ReactDatatableComponentInstaller";
+import { MomentJsInstaller } from "../installers/common/MomentJsInstaller";
+import { ExpressInstaller } from "../installers/backend/frameworks/expressInstaller";
 
 export function getInstaller(
   selectedDependencies: string[],
@@ -51,6 +62,38 @@ export function getInstaller(
       );
     case "shadcn":
       return new ShadcnInstaller(terminal, workspaceRoot, selectedDependencies);
+    case "lucideIcons":
+      return new LucideIconsInstaller(terminal, workspaceRoot);
+
+    case "reactIcons":
+      return new ReactIconsInstaller(terminal, workspaceRoot);
+
+    case "chartjs":
+      return new ChartJsInstaller(terminal, workspaceRoot);
+
+    case "recharts":
+      return new RechartInstaller(terminal, workspaceRoot);
+
+    case "rectToastify":
+      return new ReactToastifyInstaller(terminal, workspaceRoot);
+
+    case "reactHotToast":
+      return new ReactHotToastInstaller(terminal, workspaceRoot);
+
+    case "framerMotion":
+      return new FramerMotionInstaller(terminal, workspaceRoot);
+
+    case "gsap":
+      return new GsapInstaller(terminal, workspaceRoot);
+
+    case "reactDatatableComponent":
+      return new ReactDatatableComponentInstaller(terminal, workspaceRoot);
+
+    case "moment":
+      return new MomentJsInstaller(terminal, workspaceRoot);
+    //backend
+    case "express":
+      return new ExpressInstaller(terminal, workspaceRoot, selectedDependencies);
     default:
       return null;
   }
