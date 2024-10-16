@@ -22,6 +22,9 @@ import { GsapInstaller } from "../installers/frontend/GsapInstaller";
 import { ReactDatatableComponentInstaller } from "../installers/frontend/ReactDatatableComponentInstaller";
 import { MomentJsInstaller } from "../installers/common/MomentJsInstaller";
 import { ExpressInstaller } from "../installers/backend/frameworks/expressInstaller";
+import { jwtInstaller } from "../installers/backend/jwtInstaller";
+import { nodemonInstaller } from "../installers/backend/nodemonInstaller";
+import { corsInstaller } from "../installers/backend/corsInstaller";
 
 export function getInstaller(
   selectedDependencies: string[],
@@ -93,7 +96,17 @@ export function getInstaller(
       return new MomentJsInstaller(terminal, workspaceRoot);
     //backend
     case "express":
-      return new ExpressInstaller(terminal, workspaceRoot, selectedDependencies);
+      return new ExpressInstaller(
+        terminal,
+        workspaceRoot,
+        selectedDependencies
+      );
+    case "nodemon":
+      return new nodemonInstaller(terminal, workspaceRoot);
+    case "cors":
+      return new corsInstaller(terminal, workspaceRoot);
+    case "jwt":
+      return new jwtInstaller(terminal, workspaceRoot);
     default:
       return null;
   }

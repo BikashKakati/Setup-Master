@@ -84,34 +84,33 @@ export class DependenciesProvider
 
   getChildren(element?: DependencyItem): Thenable<DependencyItem[]> {
     if (!element) {
-      
-        const dependencyItem = this.dependencies.map((depOrCat) => {
-          if ("collapsible" in depOrCat) {
-            // It's a category
-            return new DependencyItem(
-              depOrCat.label,
-              depOrCat.value,
-              undefined,
-              undefined,
-              false,
-              depOrCat.icon,
-              vscode.TreeItemCollapsibleState.Collapsed // Categories are collapsible
-            );
-          } else {
-            return new DependencyItem(
-              depOrCat.label,
-              depOrCat.value,
-              undefined,
-              {
-                command: "installerDependencies.toggleDependency",
-                title: "Select",
-                arguments: [depOrCat],
-              },
-              depOrCat.checked,
-              depOrCat.icon
-            );
-          }
-        });
+      const dependencyItem = this.dependencies.map((depOrCat) => {
+        if ("collapsible" in depOrCat) {
+          // It's a category
+          return new DependencyItem(
+            depOrCat.label,
+            depOrCat.value,
+            undefined,
+            undefined,
+            false,
+            depOrCat.icon,
+            vscode.TreeItemCollapsibleState.Collapsed // Categories are collapsible
+          );
+        } else {
+          return new DependencyItem(
+            depOrCat.label,
+            depOrCat.value,
+            undefined,
+            {
+              command: "installerDependencies.toggleDependency",
+              title: "Select",
+              arguments: [depOrCat],
+            },
+            depOrCat.checked,
+            depOrCat.icon
+          );
+        }
+      });
 
       if (this.searchQuery) {
         const searchResult = this.searchDependencies(this.searchQuery);
@@ -327,6 +326,7 @@ export class DependenciesProvider
 
     // Usage of the recursive function
     uncheckDependencies(this.dependencies);
+
     this.refresh();
   }
   // Helper function to get the icon path
