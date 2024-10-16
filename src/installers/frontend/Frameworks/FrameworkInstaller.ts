@@ -5,7 +5,7 @@ import { DependencyInstaller } from "../../dependencyInstaller";
 export class FrameworkInstaller extends DependencyInstaller {
   baseAppName = "my-project";
 
-  install() {
+install() {
     const dependencyArray = this.selectedDependencies;
     let framework = "";
     const uniqueAppName = this.getUniqueAppDirectory(this.baseAppName);

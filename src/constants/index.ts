@@ -76,7 +76,7 @@ export const dependencies: DependencyOrCategory[] = [
         label: "State Management",
         value: "frontend-state-management",
         collapsible: true,
-        icon: "ui-libraries-icon",
+        icon: "state-manage-icon",
         children: [
           {
             label: "Redux",
@@ -102,7 +102,7 @@ export const dependencies: DependencyOrCategory[] = [
         label: "Icons",
         value: "frontend-icons",
         collapsible: true,
-        icon: "Icons-icon",
+        icon: "icons-icon",
         children: [
           {
             label: "Lucide Icons",
@@ -131,7 +131,7 @@ export const dependencies: DependencyOrCategory[] = [
             icon: "chartjs-icon",
           },
           {
-            label: "Recharts Icons",
+            label: "Recharts",
             value: "recharts",
             checked: false,
             icon: "recharts-icon",
@@ -139,7 +139,7 @@ export const dependencies: DependencyOrCategory[] = [
         ],
       },
       {
-        label: "Notification",
+        label: "Notifications",
         value: "frontend-notification",
         collapsible: true,
         icon: "notification-icon",
@@ -159,7 +159,7 @@ export const dependencies: DependencyOrCategory[] = [
         ],
       },
       {
-        label: "Animation",
+        label: "Animations",
         value: "frontend-animation",
         collapsible: true,
         icon: "animation-icon",
