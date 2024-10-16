@@ -3,13 +3,13 @@ import { DependencyOrCategory } from "../types";
 export const dependencies: DependencyOrCategory[] = [
   {
     label: "Frontend",
-    value:"frontend",
+    value: "frontend",
     collapsible: true,
     icon: "frontend-icon",
     children: [
       {
         label: "Languages",
-        value:"frontend-languages",
+        value: "frontend-languages",
         collapsible: true,
         icon: "language-icon",
         children: [
@@ -29,7 +29,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Frameworks",
-        value:"frontend-frameworks",
+        value: "frontend-frameworks",
         collapsible: true,
         icon: "framework-icon",
         children: [
@@ -40,7 +40,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Styles",
-        value:"frontend-styles",
+        value: "frontend-styles",
         collapsible: true,
         icon: "styles-icon",
         children: [
@@ -60,7 +60,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "UI Libraries",
-        value:"frontend-ui-libraries",
+        value: "frontend-ui-libraries",
         collapsible: true,
         icon: "ui-libraries-icon",
         children: [
@@ -74,7 +74,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "State Management",
-        value:"frontend-state-management",
+        value: "frontend-state-management",
         collapsible: true,
         icon: "ui-libraries-icon",
         children: [
@@ -100,7 +100,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Icons",
-        value:"frontend-icons",
+        value: "frontend-icons",
         collapsible: true,
         icon: "Icons-icon",
         children: [
@@ -120,7 +120,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Charts",
-        value:"frontend-charts",
+        value: "frontend-charts",
         collapsible: true,
         icon: "charts-icon",
         children: [
@@ -140,7 +140,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Notification",
-        value:"frontend-notification",
+        value: "frontend-notification",
         collapsible: true,
         icon: "notification-icon",
         children: [
@@ -160,7 +160,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Animation",
-        value:"frontend-animation",
+        value: "frontend-animation",
         collapsible: true,
         icon: "animation-icon",
         children: [
@@ -180,7 +180,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Other Libraries",
-        value:"frontend-other-libraries",
+        value: "frontend-other-libraries",
         collapsible: true,
         icon: "other-icon",
         children: [
@@ -220,14 +220,14 @@ export const dependencies: DependencyOrCategory[] = [
     ],
   },
   {
-    label:"Backend",
-    value:"backend",
-    icon:"backend-icon",
-    collapsible:true,
+    label: "Backend",
+    value: "backend",
+    icon: "backend-icon",
+    collapsible: true,
     children: [
       {
         label: "Languages",
-        value:"backend-languages",
+        value: "backend-languages",
         collapsible: true,
         icon: "language-icon",
         children: [
@@ -247,7 +247,7 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Frameworks",
-        value:"backend-frameworks",
+        value: "backend-frameworks",
         collapsible: true,
         icon: "framework-icon",
         children: [
@@ -259,10 +259,24 @@ export const dependencies: DependencyOrCategory[] = [
           },
         ],
       },
+      {
+        label: "Databases",
+        value: "databases",
+        collapsible: true,
+        icon: "framework-icon",
+        children: [
+          {
+            label: "MongoDB",
+            value: "mongodb",
+            checked: false,
+            icon: "mongodb-icon",
+          },
+        ],
+      },
 
       {
         label: "Other Library",
-        value:"backend-other-libraries",
+        value: "backend-other-libraries",
         collapsible: true,
         icon: "other-icon",
         children: [
@@ -299,6 +313,6 @@ export const onlyOneSelectCategoriesList: string[] = [
   "Frameworks",
   "Styles",
   "Languages",
-  "State Management"
+  "State Management",
 ];
 export const topDependenciesList: string[] = ["react", "vite", "next"];

@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/swapnilchougule00/vs-code-extension-installer.git"
   },
-  "version": "0.0.4",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.94.0"
   },

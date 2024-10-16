@@ -25,6 +25,7 @@ import { ExpressInstaller } from "../installers/backend/frameworks/expressInstal
 import { jwtInstaller } from "../installers/backend/jwtInstaller";
 import { nodemonInstaller } from "../installers/backend/nodemonInstaller";
 import { corsInstaller } from "../installers/backend/corsInstaller";
+import { mongodbInstaller } from "../installers/backend/databases/mongoInstaller";
 
 export function getInstaller(
   selectedDependencies: string[],
@@ -107,6 +108,8 @@ export function getInstaller(
       return new corsInstaller(terminal, workspaceRoot);
     case "jwt":
       return new jwtInstaller(terminal, workspaceRoot);
+    case "mongodb":
+      return new mongodbInstaller(terminal, workspaceRoot);
     default:
       return null;
   }
