@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
-import { DependencyInstaller } from "../dependencyInstaller";
+import { DependencyInstaller } from "../../dependencyInstaller";
 
 export class FrameworkInstaller extends DependencyInstaller {
   baseAppName = "my-project";
