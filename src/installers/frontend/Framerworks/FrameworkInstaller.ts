@@ -4,7 +4,6 @@ import { DependencyInstaller } from "../dependencyInstaller";
 
 export class FrameworkInstaller extends DependencyInstaller {
   baseAppName = "my-project";
- 
 
   install() {
     const dependencyArray = this.selectedDependencies;
@@ -22,7 +21,7 @@ export class FrameworkInstaller extends DependencyInstaller {
     } else if (dependencyArray.includes("react")) {
       framework = "react";
 
-      const craCommand = `npx create-react-app ${uniqueAppName}  ${
+      const craCommand = `npx create-react-app@latest ${uniqueAppName}  ${
         dependencyArray.includes("ts") ? "--template typescript" : ""
       }`;
       this.runCommand(craCommand);
