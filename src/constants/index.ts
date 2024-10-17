@@ -302,7 +302,7 @@ export const dependencies: DependencyOrCategory[] = [
             label: "Cors",
             value: "cors",
             checked: false,
-            icon: "cors-icon",
+            icon: "not-found-icon",
           },
         ],
       },

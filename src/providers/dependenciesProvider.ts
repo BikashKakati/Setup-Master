@@ -10,7 +10,7 @@ export class DependencyItem extends vscode.TreeItem {
     public readonly description?: string,
     public readonly command?: vscode.Command,
     public checked: boolean = false,
-    public iconPath?: vscode.ThemeIcon | vscode.Uri | string,
+    public iconPath: vscode.ThemeIcon | vscode.Uri | string="",
     public collapsibleState: vscode.TreeItemCollapsibleState = vscode
       .TreeItemCollapsibleState.None
   ) {
@@ -74,10 +74,8 @@ export class DependenciesProvider
   getTreeItem(element: DependencyItem): vscode.TreeItem {
     if (element.checked) {
       element.iconPath = new vscode.ThemeIcon("check");
-    } else if (element.iconPath) {
-      element.iconPath = this.getIconPath(element.iconPath.toString());
     } else {
-      element.iconPath = this.getIconPath("not-found-icon");
+      element.iconPath = this.getIconPath(element.iconPath.toString())!;
     }
     return element;
   }
@@ -330,11 +328,8 @@ export class DependenciesProvider
     this.refresh();
   }
   // Helper function to get the icon path
-  getIconPath(iconName: string): vscode.Uri | vscode.ThemeIcon {
+  getIconPath(iconName: string): vscode.Uri | null {
     const assetPath = path.join(this.context.extensionPath, "assets");
-    if (!iconName) {
-      return new vscode.ThemeIcon("circle-outline");
-    }
     return vscode.Uri.file(path.join(assetPath, `${iconName}.png`));
   }
 }
