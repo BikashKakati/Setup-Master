@@ -1,13 +1,19 @@
 import * as fs from "fs";
-import * as vscode from "vscode";
 import { DependencyInstaller } from "../../dependencyInstaller";
+import { topDependenciesList } from "../../../constants";
 
 export class ExpressInstaller extends DependencyInstaller {
   baseAppName = "backend";
-
   install() {
+    if (
+      this.selectedDependencies.some((dep) => topDependenciesList.includes(dep))
+    ) {
+      this.runCommand("cd ..");
+    }
+
     const uniqueAppName = this.getUniqueAppDirectory(this.baseAppName);
     const appDirectory = `${this.workspaceRoot}/${uniqueAppName}`;
+
     // create the folder with unique name
     fs.mkdirSync(appDirectory);
 
@@ -18,10 +24,10 @@ export class ExpressInstaller extends DependencyInstaller {
     this.runCommand(initCommand);
     this.runCommand(installExpress);
 
-    if(this.selectedDependencies.includes("back-ts")){
-        const typescriptCommands = `npm install typescript ts-node @types/node @types/express --save-dev`;
-        this.runCommand(typescriptCommands);
-        const tsconfigContent = `
+    if (this.selectedDependencies.includes("back-ts")) {
+      const typescriptCommands = `npm install typescript ts-node @types/node @types/express --save-dev`;
+      this.runCommand(typescriptCommands);
+      const tsconfigContent = `
       {
         "compilerOptions": {
           "target": "ES6",
@@ -35,15 +41,15 @@ export class ExpressInstaller extends DependencyInstaller {
         }
       }
     `;
-    const tsconfigPath = `${appDirectory}/tsconfig.json`;
-    fs.writeFileSync(tsconfigPath, tsconfigContent);
+      const tsconfigPath = `${appDirectory}/tsconfig.json`;
+      fs.writeFileSync(tsconfigPath, tsconfigContent);
 
-    // Create basic backend folder and files
-    const srcDir = `${appDirectory}/src`;
-    fs.mkdirSync(srcDir);
+      // Create basic backend folder and files
+      const srcDir = `${appDirectory}/src`;
+      fs.mkdirSync(srcDir);
 
-    const serverFilePath = `${srcDir}/server.ts`;
-    const serverFileContent = `
+      const serverFilePath = `${srcDir}/server.ts`;
+      const serverFileContent = `
       import express, { Request, Response } from 'express';
 
       const app = express();
@@ -57,8 +63,8 @@ export class ExpressInstaller extends DependencyInstaller {
         console.log(\`Server is running on port \${PORT}\`);
       });
     `;
-    fs.writeFileSync(serverFilePath, serverFileContent);
-    return;
+      fs.writeFileSync(serverFilePath, serverFileContent);
+      return;
     }
     // Create basic backend files like server.js
     const serverFilePath = `${appDirectory}/server.js`;

@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
+import { execSync } from "child_process";
 
 export class DependencyInstaller {
   constructor(

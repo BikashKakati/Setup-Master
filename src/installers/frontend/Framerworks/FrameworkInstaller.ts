@@ -1,12 +1,14 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
 import { DependencyInstaller } from "../../dependencyInstaller";
+import path from "path";
 
 export class FrameworkInstaller extends DependencyInstaller {
   baseAppName = "my-project";
 
-install() {
+  install() {
     const dependencyArray = this.selectedDependencies;
+
     let framework = "";
     const uniqueAppName = this.getUniqueAppDirectory(this.baseAppName);
 

@@ -25,7 +25,7 @@ import { ReactHotToastInstaller } from "../installers/frontend/Other libraries/R
 import { FramerMotionInstaller } from "../installers/frontend/Animation libraries/FramerMotionInstaller";
 import { GsapInstaller } from "../installers/frontend/Animation libraries/GsapInstaller";
 import { ReactDatatableComponentInstaller } from "../installers/frontend/Other libraries/ReactDatatableComponentInstaller";
-import { FrameworkInstaller } from "../installers/frontend/Frameworks/FrameworkInstaller";
+import { FrameworkInstaller } from "../installers/frontend/Framerworks/FrameworkInstaller";
 
 export function getInstaller(
   selectedDependencies: string[],

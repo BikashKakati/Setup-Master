@@ -30,6 +30,7 @@ export function registerInstallCommand(
       inputBox.show();
     }
   );
+
   const closeSearchResult = vscode.commands.registerCommand(
     "installerDependencies.close",
     () => {

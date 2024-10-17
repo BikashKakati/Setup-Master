@@ -7,9 +7,9 @@
     "type": "git",
     "url": "https://github.com/swapnilchougule00/vs-code-extension-installer.git"
   },
-  "version": "0.0.6",
+  "version": "0.0.7",
   "engines": {
-    "vscode": "^1.94.0"
+    "vscode": "^1.94.0" 
   },
   "icon": "assets/Setup-master-Icon.png",
   "categories": [
