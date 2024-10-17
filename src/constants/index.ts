@@ -148,7 +148,7 @@ export const dependencies: DependencyOrCategory[] = [
             label: "React toastify",
             value: "rectToastify",
             checked: false,
-            icon: "chartjs-icon",
+            icon: "toastify-icon",
           },
           {
             label: "React Hot Toast",
@@ -263,7 +263,7 @@ export const dependencies: DependencyOrCategory[] = [
         label: "Databases",
         value: "databases",
         collapsible: true,
-        icon: "framework-icon",
+        icon: "database-icon",
         children: [
           {
             label: "MongoDB",
