@@ -17,7 +17,7 @@ This VS Code extension makes it easy to install frontend and backend dependencie
 
 1. Open **Visual Studio Code**.
 2. Navigate to the **Extensions** view (`Ctrl+Shift+X`).
-3. Search for `Dependency Manager` and click **Install**.
+3. Search for `Setup Master` and click **Install**.
 4. [Marketplace Link](https://marketplace.visualstudio.com/items?itemName=SetupMaster.SetUp-Master).
 
 ## Features
