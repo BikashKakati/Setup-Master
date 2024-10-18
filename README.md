@@ -1,12 +1,11 @@
-# Dependency Manager Extension
+# Setup Master
 
 <!--![Setup Master](./assets/Setup-master-Icon.png) -->
 
 
 <p align="center">
-  <img src="./assets/Setup-master-Icon.png" alt="Material Icon Theme" width="200" height="200" />
+  <img src="./assets/Setup-master-Icon.png" alt="Setup Master" width="200" height="200" />
 </p>
-<h2 align="center">Material Icon Theme</h2>
 
 This VS Code extension makes it easy to install frontend and backend dependencies without using the terminal. Browse through categories, choose the libraries you need, and install them with one click!
 
