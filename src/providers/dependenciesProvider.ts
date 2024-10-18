@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as vscode from "vscode";
-import { onlyOneSelectCategoriesList, topDependenciesList } from "../constants";
+import { onlyOneSelectCategoriesList, tailwindDependentLibraries, topDependenciesList } from "../constants";
 import { Category, Dependency, DependencyOrCategory } from "../types";
 
 export class DependencyItem extends vscode.TreeItem {
@@ -10,7 +10,7 @@ export class DependencyItem extends vscode.TreeItem {
     public readonly description?: string,
     public readonly command?: vscode.Command,
     public checked: boolean = false,
-    public iconPath?: vscode.ThemeIcon | vscode.Uri | string,
+    public iconPath: vscode.ThemeIcon | vscode.Uri | string="",
     public collapsibleState: vscode.TreeItemCollapsibleState = vscode
       .TreeItemCollapsibleState.None
   ) {
@@ -30,7 +30,8 @@ export class DependenciesProvider
     DependencyItem | undefined | void
   > = this._onDidChangeTreeData.event;
 
-  private selectedDependencies: string[] = [];
+  private selectedFrontendDependencies: string[] = []; // Array for frontend dependencies
+  private selectedBackendDependencies: string[] = [];
   private dependencies: DependencyOrCategory[];
   private searchQuery: string | undefined;
   searchActive: boolean = false; // Tracks whether the search is active
@@ -67,6 +68,65 @@ export class DependenciesProvider
     }
     return undefined;
   }
+  private addToFrontendDependencies(dep: Dependency) {
+    topDependenciesList.includes(dep.value)
+      ? this.selectedFrontendDependencies.unshift(dep.value)
+      : this.selectedFrontendDependencies.push(dep.value);
+  }
+
+  private addToBackendDependencies(dep: Dependency) {
+    topDependenciesList.includes(dep.value)
+      ? this.selectedBackendDependencies.unshift(dep.value)
+      : this.selectedBackendDependencies.push(dep.value);
+  }
+  private removeDependencyFromSelectedLists(depValue: string) {
+    this.selectedFrontendDependencies = this.selectedFrontendDependencies.filter(
+      (d) => d !== depValue
+    );
+    this.selectedBackendDependencies = this.selectedBackendDependencies.filter(
+      (d) => d !== depValue
+    );
+  }
+  private findNearestParentCategory(
+    dep: Dependency,
+    currentCategories: Category[]
+  ): Category | undefined {
+    for (const category of currentCategories) {
+      if ("children" in category) {
+        // Check if the dependency is directly in this category's children
+        const foundInChildren = category.children.some(
+          (child) => child.value === dep.value
+        );
+        if (foundInChildren) {
+          return category; // Return the current category if the dependency is found
+        }
+
+        // Recursively check each child that could be a category
+        for (const child of category.children) {
+          if ("children" in child) {
+            const foundInNestedCategory = this.findNearestParentCategory(dep, [
+              child,
+            ]);
+            if (foundInNestedCategory) {
+              return foundInNestedCategory;
+            }
+          }
+        }
+      }
+    }
+
+    return undefined;
+  }
+
+  private searchDependencies(query: string): DependencyItem[] {
+    const allDependencies = this.getAllDependencies();
+
+    const filteredDependencies = allDependencies.filter((depItem) =>
+      depItem.label.toLowerCase().includes(query?.toLowerCase() || "")
+    );
+
+    return filteredDependencies;
+  }
 
   refresh(searchQuery?: string): void {
     if (searchQuery) {
@@ -82,10 +142,8 @@ export class DependenciesProvider
   getTreeItem(element: DependencyItem): vscode.TreeItem {
     if (element.checked) {
       element.iconPath = new vscode.ThemeIcon("check");
-    } else if (element.iconPath) {
-      element.iconPath = this.getIconPath(element.iconPath.toString());
     } else {
-      element.iconPath = this.getIconPath("not-found-icon");
+      element.iconPath = this.getIconPath(element.iconPath.toString())!;
     }
     return element;
   }
@@ -135,71 +193,41 @@ export class DependenciesProvider
       console.log("127 category", category);
 
       if (category && category.children) {
-        return Promise.resolve(
-          category.children.map((child) => {
-            if ("collapsible" in child) {
-              return new DependencyItem(
-                child.label,
-                child.value,
-                undefined,
-                undefined,
-                false,
-                child.icon,
-                vscode.TreeItemCollapsibleState.Collapsed // Subcategories are also collapsible
-              );
-            } else {
-              return new DependencyItem(
-                child.label,
-                child.value,
-                undefined,
-                {
-                  command: "installerDependencies.toggleDependency",
-                  title: "Select",
-                  arguments: [child],
-                },
-                child.checked,
-                child.icon
-              );
-            }
-          })
-        );
+        const dependencyItem = category.children.map((child) => {
+          if ("collapsible" in child) {
+            return new DependencyItem(
+              child.label,
+              child.value,
+              undefined,
+              undefined,
+              false,
+              child.icon,
+              vscode.TreeItemCollapsibleState.Collapsed // Subcategories are also collapsible
+            );
+          } else {
+            return new DependencyItem(
+              child.label,
+              child.value,
+              undefined,
+              {
+                command: "installerDependencies.toggleDependency",
+                title: "Select",
+                arguments: [child],
+              },
+              child.checked,
+              child.icon
+            );
+          }
+        });
+
+        return Promise.resolve(dependencyItem);
       }
     }
 
     return Promise.resolve([]);
   }
 
-  findNearestParentCategory(
-    dep: Dependency,
-    currentCategories: Category[]
-  ): Category | undefined {
-    for (const category of currentCategories) {
-      if ("children" in category) {
-        // Check if the dependency is directly in this category's children
-        const foundInChildren = category.children.some(
-          (child) => child.value === dep.value
-        );
-        if (foundInChildren) {
-          return category; // Return the current category if the dependency is found
-        }
-
-        // Recursively check each child that could be a category
-        for (const child of category.children) {
-          if ("children" in child) {
-            const foundInNestedCategory = this.findNearestParentCategory(dep, [
-              child,
-            ]);
-            if (foundInNestedCategory) {
-              return foundInNestedCategory;
-            }
-          }
-        }
-      }
-    }
-
-    return undefined;
-  }
-
+  
   getAllDependencies(): DependencyItem[] {
     const allDependencies: DependencyItem[] = [];
 
@@ -232,26 +260,14 @@ export class DependenciesProvider
     return allDependencies;
   }
 
-  searchDependencies(query: string): DependencyItem[] {
-    const allDependencies = this.getAllDependencies();
 
-    if (!query) {
-      return allDependencies;
-    }
+  
 
-    const filteredDependencies = allDependencies.filter((depItem) =>
-      depItem.label.toLowerCase().includes(query.toLowerCase())
-    );
-
-    return filteredDependencies;
-  }
-
+  // Toggle the selection (check/uncheck) of a dependency
   toggleDependency(dep: Dependency) {
     // user can select only option, logic...
-    const nearestParentCategory = this.findNearestParentCategory(
-      dep,
-      this.dependencies as Category[]
-    );
+    const nearestParentCategory = this.findNearestParentCategory(dep, this.dependencies as Category[]);
+
     if (
       nearestParentCategory &&
       nearestParentCategory.children &&
@@ -260,17 +276,15 @@ export class DependenciesProvider
       nearestParentCategory.children.forEach((child) => {
         if (!("children" in child) && child !== dep && child.checked) {
           child.checked = false; // Deselect other dependencies
-          this.selectedDependencies = this.selectedDependencies.filter(
-            (d) => d !== child.value
-          );
+          this.removeDependencyFromSelectedLists(child.value);
         }
       });
     }
-    const tailwindDependentLibraries = ["shadcn", "radixui"];
+   
 
     if (
       tailwindDependentLibraries.includes(dep.value) &&
-      !this.selectedDependencies.includes("tailwind")
+      !this.selectedFrontendDependencies.includes("frontend-tailwind")
     ) {
       this.dependencies.forEach((category: DependencyOrCategory) => {
         if ("children" in category) {
@@ -280,7 +294,7 @@ export class DependenciesProvider
                 (dependency: DependencyOrCategory) => {
                   if (
                     !("children" in dependency) &&
-                    dependency.value === "tailwind"
+                    dependency.value === "frontend-tailwind"
                   ) {
                     dependency.checked = true;
                   }
@@ -290,37 +304,48 @@ export class DependenciesProvider
           });
         }
       });
-      this.selectedDependencies.push("tailwind");
+      this.selectedFrontendDependencies.push("frontend-tailwind");
       vscode.window.showInformationMessage(`tailwind selected.`);
     }
+
     dep.checked = !dep.checked;
 
     if (dep.checked) {
-      topDependenciesList.includes(dep.value)
-        ? this.selectedDependencies.unshift(dep.value)
-        : this.selectedDependencies.push(dep.value);
+      if (dep.value.includes("backend")) {
+        this.addToBackendDependencies(dep);
+      } else if (dep.value.includes("frontend")) {
+        this.addToFrontendDependencies(dep);
+      }
 
       vscode.window.showInformationMessage(`${dep.label} selected.`);
-    } else {
-      this.selectedDependencies = this.selectedDependencies.filter(
-        (d) => d !== dep.value
-      );
+    }  else {
+      this.removeDependencyFromSelectedLists(dep.value);
       vscode.window.showInformationMessage(`${dep.label} deselected.`);
+    }
+    if(this.searchQuery){
+      this.refresh(this.searchQuery);
+      return;
     }
     this.refresh();
   }
 
-  getSelectedDependencies(): string[] {
-    return this.selectedDependencies;
+  getSelectedFrontendDependencies(): string[] {
+    return this.selectedFrontendDependencies;
+  }
+
+  getSelectedBackendDependencies(): string[] {
+    return this.selectedBackendDependencies;
   }
 
   // Clear selected dependencies
   clearSelectedDependencies() {
-    this.selectedDependencies.forEach((dep) => {
+    const selectedDependencies = [...this.selectedFrontendDependencies, ...this.selectedBackendDependencies];
+    selectedDependencies.forEach((dep) => {
       vscode.window.showInformationMessage(`${dep} Installing `);
     });
 
-    this.selectedDependencies = [];
+    this.selectedFrontendDependencies = [];
+    this.selectedBackendDependencies = [];
     function uncheckDependencies(dependencies: DependencyOrCategory[]) {
       dependencies.forEach((depOrCat) => {
         if ("children" in depOrCat) {
@@ -339,11 +364,8 @@ export class DependenciesProvider
     this.refresh();
   }
   // Helper function to get the icon path
-  getIconPath(iconName: string): vscode.Uri | vscode.ThemeIcon {
+  getIconPath(iconName: string): vscode.Uri | null {
     const assetPath = path.join(this.context.extensionPath, "assets");
-    if (!iconName) {
-      return new vscode.ThemeIcon("circle-outline");
-    }
     return vscode.Uri.file(path.join(assetPath, `${iconName}.png`));
   }
 }

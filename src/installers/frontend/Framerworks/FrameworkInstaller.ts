@@ -12,28 +12,28 @@ export class FrameworkInstaller extends DependencyInstaller {
     let framework = "";
     const uniqueAppName = this.getUniqueAppDirectory(this.baseAppName);
 
-    if (dependencyArray.includes("vite")) {
+    if (dependencyArray.includes("frontend-vite")) {
       framework = "vite";
       const viteCommand = `npm create vite@latest ${uniqueAppName} -- --template  ${
-        dependencyArray.includes("ts") ? "react-ts" : "react"
+        dependencyArray.includes("frontend-ts") ? "react-ts" : "react"
       }`;
       this.runCommand(viteCommand);
       this.runCommand(`cd ${uniqueAppName}`);
       this.runCommand("npm install");
-    } else if (dependencyArray.includes("react")) {
+    } else if (dependencyArray.includes("frontend-react")) {
       framework = "react";
 
       const craCommand = `npx create-react-app@latest ${uniqueAppName}  ${
-        dependencyArray.includes("ts") ? "--template typescript" : ""
+        dependencyArray.includes("frontend-ts") ? "--template typescript" : ""
       }`;
       this.runCommand(craCommand);
       this.runCommand(`cd ${uniqueAppName}`);
       this.runCommand("npm install");
-    } else if (dependencyArray.includes("next")) {
+    } else if (dependencyArray.includes("frontend-next")) {
       framework = "next";
 
       const nextCommand = `npx create-next-app@latest ${uniqueAppName} ${
-        dependencyArray.includes("ts") ? "--typescript" : "--javascript"
+        dependencyArray.includes("frontend-ts") ? "--typescript" : "--javascript"
       } --no-tailwind --eslint --src-dir --app --import-alias '@/*' --yes
 `;
       this.runCommand(nextCommand);

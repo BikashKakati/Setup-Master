@@ -21,19 +21,19 @@ export class tailwindInstaller extends DependencyInstaller {
 
     const indexCSSCommand = `Set-Content -Path "src/index.css" -Value "${indexCSSContent}" -Encoding UTF8`;
     const dependencyArray = this.selectedDependencies;
-    if (dependencyArray.includes("vite")) {
+    if (dependencyArray.includes("frontend-vite")) {
       this.runCommand("npm install -D tailwindcss postcss autoprefixer");
       this.runCommand("npx tailwindcss init -p");
 
       this.runCommand(tailwindConfigCommand);
       this.runCommand(indexCSSCommand);
-    } else if (dependencyArray.includes("react")) {
+    } else if (dependencyArray.includes("frontend-react")) {
       this.runCommand("npm install -D tailwindcss");
       this.runCommand("npx tailwindcss init");
 
       this.runCommand(tailwindConfigCommand);
       this.runCommand(indexCSSCommand);
-    } else if (dependencyArray.includes("next")) {
+    } else if (dependencyArray.includes("frontend-next")) {
       this.runCommand("npm install -D tailwindcss postcss autoprefixer");
       this.runCommand("npx tailwindcss init -p");
 
