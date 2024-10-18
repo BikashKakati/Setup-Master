@@ -33,9 +33,24 @@ export const dependencies: DependencyOrCategory[] = [
         collapsible: true,
         icon: "framework-icon",
         children: [
-          { label: "React", value: "frontend-react", checked: false, icon: "react" },
-          { label: "Next", value: "frontend-next", checked: false, icon: "next" },
-          { label: "Vite", value: "frontend-vite", checked: false, icon: "vite" },
+          {
+            label: "React",
+            value: "frontend-react",
+            checked: false,
+            icon: "react",
+          },
+          {
+            label: "Next",
+            value: "frontend-next",
+            checked: false,
+            icon: "next",
+          },
+          {
+            label: "Vite",
+            value: "frontend-vite",
+            checked: false,
+            icon: "vite",
+          },
         ],
       },
       {
@@ -196,7 +211,12 @@ export const dependencies: DependencyOrCategory[] = [
             checked: false,
             icon: "react-query-icon",
           },
-          { label: "Zod", value: "frontend-zod", checked: false, icon: "zod-icon" },
+          {
+            label: "Zod",
+            value: "frontend-zod",
+            checked: false,
+            icon: "zod-icon",
+          },
           {
             label: "React Datatable Component",
             value: "frontend-reactDatatableComponent",
@@ -293,6 +313,12 @@ export const dependencies: DependencyOrCategory[] = [
             icon: "axios-icon",
           },
           {
+            label: "Moment",
+            value: "backend-moment",
+            checked: false,
+            icon: "moment-icon",
+          },
+          {
             label: "Json Web Token",
             value: "backend-jwt",
             checked: false,
@@ -315,6 +341,13 @@ export const onlyOneSelectCategoriesList: string[] = [
   "Languages",
   "State Management",
 ];
-export const topDependenciesList: string[] = ["frontend-react", "frontend-vite", "frontend-next"];
+export const topDependenciesList: string[] = [
+  "frontend-react",
+  "frontend-vite",
+  "frontend-next",
+];
 
-export const tailwindDependentLibraries = ["frontend-shadcn", "frontend-radixui"];
+export const tailwindDependentLibraries = [
+  "frontend-shadcn",
+  "frontend-radixui",
+];

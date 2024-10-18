@@ -12,7 +12,6 @@ import { zodInstaller } from "../installers/frontend/Other-libraries/zodInstalle
 import { zustandInstaller } from "../installers/frontend/State-management/zustandInstaller";
 import { reactRouterInstaller } from "../installers/frontend/Other-libraries/reactRouterInstaller";
 import { reactHookFormInstaller } from "../installers/frontend/Other-libraries/reactHookFormInstaller";
-import { reactQueryInstaller } from "../installers/frontend/Other-libraries/rectQueryinstaller";
 import { jotaiInstaller } from "../installers/frontend/State-management/jotaiInstaller";
 import { tailwindInstaller } from "../installers/frontend/Styles/tailwindInstaller";
 import { ShadcnInstaller } from "../installers/frontend/UI-libraries/shadcnInstaller";
@@ -20,12 +19,13 @@ import { LucideIconsInstaller } from "../installers/frontend/Other-libraries/Luc
 import { ReactIconsInstaller } from "../installers/frontend/Other-libraries/ReactIconsInstaller";
 import { ChartJsInstaller } from "../installers/frontend/Charts/ChartJsInstaller";
 import { RechartInstaller } from "../installers/frontend/Charts/RechartInstaller";
-import { FrameworkInstaller } from "../installers/frontend/Framerworks/FrameworkInstaller";
+import { FrameworkInstaller } from "../installers/frontend/Frameworks/FrameworkInstaller";
 import { ReactToastifyInstaller } from "../installers/frontend/Other-libraries/ReactToastifyInstaller";
 import { ReactHotToastInstaller } from "../installers/frontend/Other-libraries/ReactHotToastInstaller";
 import { FramerMotionInstaller } from "../installers/frontend/Animation-libraries/FramerMotionInstaller";
 import { GsapInstaller } from "../installers/frontend/Animation-libraries/GsapInstaller";
 import { ReactDatatableComponentInstaller } from "../installers/frontend/Other-libraries/ReactDatatableComponentInstaller";
+import { reactQueryInstaller } from "../installers/frontend/Other-libraries/rectQueryInstaller";
 
 export function getInstaller(
   selectedDependencies: string[],
@@ -95,6 +95,7 @@ export function getInstaller(
       return new ReactDatatableComponentInstaller(terminal, workspaceRoot);
 
     case "frontend-moment":
+    case "backend-moment":
       return new MomentJsInstaller(terminal, workspaceRoot);
     //backend
     case "backend-express":

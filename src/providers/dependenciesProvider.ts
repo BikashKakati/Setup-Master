@@ -1,6 +1,10 @@
 import * as path from "path";
 import * as vscode from "vscode";
-import { onlyOneSelectCategoriesList, tailwindDependentLibraries, topDependenciesList } from "../constants";
+import {
+  onlyOneSelectCategoriesList,
+  tailwindDependentLibraries,
+  topDependenciesList,
+} from "../constants";
 import { Category, Dependency, DependencyOrCategory } from "../types";
 
 export class DependencyItem extends vscode.TreeItem {
@@ -10,7 +14,7 @@ export class DependencyItem extends vscode.TreeItem {
     public readonly description?: string,
     public readonly command?: vscode.Command,
     public checked: boolean = false,
-    public iconPath: vscode.ThemeIcon | vscode.Uri | string="",
+    public iconPath: vscode.ThemeIcon | vscode.Uri | string = "",
     public collapsibleState: vscode.TreeItemCollapsibleState = vscode
       .TreeItemCollapsibleState.None
   ) {
@@ -52,14 +56,6 @@ export class DependenciesProvider
         return cat as Category;
       }
       if ("children" in cat) {
-        const foundInChildren = cat.children.some(
-          (child) => child.value === value
-        );
-
-        if (foundInChildren) {
-          return cat as Category;
-        }
-
         const found = this.findCategoryByLabel(cat.children, value);
         if (found) {
           return found;
@@ -80,9 +76,8 @@ export class DependenciesProvider
       : this.selectedBackendDependencies.push(dep.value);
   }
   private removeDependencyFromSelectedLists(depValue: string) {
-    this.selectedFrontendDependencies = this.selectedFrontendDependencies.filter(
-      (d) => d !== depValue
-    );
+    this.selectedFrontendDependencies =
+      this.selectedFrontendDependencies.filter((d) => d !== depValue);
     this.selectedBackendDependencies = this.selectedBackendDependencies.filter(
       (d) => d !== depValue
     );
@@ -227,7 +222,6 @@ export class DependenciesProvider
     return Promise.resolve([]);
   }
 
-  
   getAllDependencies(): DependencyItem[] {
     const allDependencies: DependencyItem[] = [];
 
@@ -260,13 +254,13 @@ export class DependenciesProvider
     return allDependencies;
   }
 
-
-  
-
   // Toggle the selection (check/uncheck) of a dependency
   toggleDependency(dep: Dependency) {
     // user can select only option, logic...
-    const nearestParentCategory = this.findNearestParentCategory(dep, this.dependencies as Category[]);
+    const nearestParentCategory = this.findNearestParentCategory(
+      dep,
+      this.dependencies as Category[]
+    );
 
     if (
       nearestParentCategory &&
@@ -280,7 +274,6 @@ export class DependenciesProvider
         }
       });
     }
-   
 
     if (
       tailwindDependentLibraries.includes(dep.value) &&
@@ -318,11 +311,11 @@ export class DependenciesProvider
       }
 
       vscode.window.showInformationMessage(`${dep.label} selected.`);
-    }  else {
+    } else {
       this.removeDependencyFromSelectedLists(dep.value);
       vscode.window.showInformationMessage(`${dep.label} deselected.`);
     }
-    if(this.searchQuery){
+    if (this.searchQuery) {
       this.refresh(this.searchQuery);
       return;
     }
@@ -339,7 +332,10 @@ export class DependenciesProvider
 
   // Clear selected dependencies
   clearSelectedDependencies() {
-    const selectedDependencies = [...this.selectedFrontendDependencies, ...this.selectedBackendDependencies];
+    const selectedDependencies = [
+      ...this.selectedFrontendDependencies,
+      ...this.selectedBackendDependencies,
+    ];
     selectedDependencies.forEach((dep) => {
       vscode.window.showInformationMessage(`${dep} Installing `);
     });

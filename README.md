@@ -1,53 +1,45 @@
-# Setup Master
+# Dependency Manager Extension
 
-Setup Master is a VS Code extension designed to simplify the process of setting up new projects by allowing developers to easily install dependencies with just a few clicks. Instead of manually entering installation commands, this extension streamlines the workflow by enabling users to select the libraries and frameworks they need, making project setup quicker and more efficient.
+![Setup Master](./assets/Setup-master-Icon.png)
+
+This VS Code extension makes it easy to install frontend and backend dependencies without using the terminal. Browse through categories, choose the libraries you need, and install them with one click!
+
+<!-- ## Installation
+
+![Installation GIF](path-to-installation-gif) -->
+
+![Sidebar Visual](/assets/sidebar-view.png)
+
+
+1. Open **Visual Studio Code**.
+2. Navigate to the **Extensions** view (`Ctrl+Shift+X`).
+3. Search for `Dependency Manager` and click **Install**.
+4. [Marketplace Link](https://marketplace.visualstudio.com/items?itemName=SetupMaster.SetUp-Master).
 
 ## Features
 
-- **Easy Dependency Selection**: Select from popular libraries and frameworks like React, Vite, Tailwind CSS, Redux, and more.
-- **Quick Installation**: Automatically installs selected dependencies with a single command.
-- **User-Friendly Interface**: Intuitive interface that allows for easy navigation and selection of dependencies.
-- **Support for Multiple Libraries**: Select multiple libraries from various categories including languages, frameworks, styles, and other libraries.
+- **Categorized Dependencies**: Browse and install dependencies for frontend, backend, state management, UI libraries, and more.
+- **One-click Installations**: No need for terminal commands – select and install directly from the sidebar.
 
-## Installation
+## Categories
 
-1. Install Visual Studio Code if you haven't already.
-2. Open the Extensions view (`Ctrl+Shift+X` or `Cmd+Shift+X` on macOS).
-3. Search for `Setup Master`.
-4. Click `Install`.
+### Frontend
 
-## Usage
+- **Languages**: JavaScript, TypeScript
+- **Frameworks**: React, Next.js, Vite
+- **Styles**: Tailwind CSS, Bootstrap
+- **UI Libraries**: Shadcn
+- **State Management**: Redux, Jotai, Zustand
+- **Icons**: Lucide, React Icons
+- **Charts**: Chart.js, Recharts
+- **Notifications**: React Toastify, React Hot Toast
+- **Animations**: Framer Motion, GSAP
+- **Other Libraries**: Axios, Zod, Moment.js, React Hook Form
 
-1. Open the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on macOS).
-2. Type `Setup Master` to see available commands.
-3. Select `Select Dependencies` to open the dependency selection view.
-4. Choose the libraries you want to install.
-5. Click on install to install all selected dependencies.
+### Backend
 
-## Dependencies
+- **Languages**: JavaScript, TypeScript
+- **Frameworks**: Express
+- **Databases**: MongoDB
+- **Other Libraries**: Nodemon, Axios, Json Web Token, Cors
 
-This extension supports the installation of the following libraries:
-
-- **Languages**:
-  - JavaScript
-  - TypeScript
-- **Frameworks**:
-  - React
-  - Next.js
-  - Vite
-- **Styles**:
-  - Tailwind CSS
-  - Bootstrap
-- **UI Libraries**:
-  - Shadcn
-- **Other Libraries**:
-  - Axios
-  - Redux
-  - Zod
-  - Zustand
-  - React Hook Form
-
-## Acknowledgments
-
-- Thanks to the open-source community for their contributions and support.
-- Inspired by the need for faster and more efficient project setups in software development.
