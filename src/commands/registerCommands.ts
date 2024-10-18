@@ -43,8 +43,7 @@ export function registerInstallCommand(
   const installDependenciesCommand = vscode.commands.registerCommand(
     "installerDependencies.installSelectedDependencies",
     async () => {
-      const selectedDependencies =
-        dependenciesProvider.getSelectedDependencies();
+      const selectedDependencies = [...dependenciesProvider.getSelectedFrontendDependencies(), ...dependenciesProvider.getSelectedBackendDependencies()];
 
       if (selectedDependencies.length === 0) {
         vscode.window.showWarningMessage("No dependencies selected.");
@@ -55,24 +54,30 @@ export function registerInstallCommand(
       terminal.show(true);
 
       const workspaceFolders = vscode.workspace.workspaceFolders;
+
       if (!workspaceFolders || workspaceFolders.length === 0) {
         vscode.window.showErrorMessage("No workspace folder is open.");
         return;
       }
+
       const workspaceRoot = workspaceFolders[0].uri.fsPath;
 
-      // Install dependencies one by one
       selectedDependencies.forEach((dep) => {
+        console.log(dep);
         const installer = getInstaller(
           selectedDependencies,
           dep,
           terminal,
           workspaceRoot
         );
+        console.log(installer);
         if (installer) {
           installer.install();
         }
       });
+
+      // Install dependencies one by one
+      // installDependencies(selectedDependencies);
 
       vscode.window.showInformationMessage(
         `Installing ${selectedDependencies.length} dependencies...`
