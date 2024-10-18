@@ -34,81 +34,82 @@ export function getInstaller(
   workspaceRoot: string
 ): DependencyInstaller | null {
   switch (dependency) {
-    case "vite":
-    case "react":
-    case "next":
+    case "frontend-vite":
+    case "frontend-react":
+    case "frontend-next":
       return new FrameworkInstaller(
         terminal,
         workspaceRoot,
         selectedDependencies
       );
-    case "redux":
+    case "frontend-redux":
       return new ReduxInstaller(terminal, workspaceRoot);
-    case "axios":
+    case "frontend-axios":
+    case "backend-axios":
       return new axiosInstaller(terminal, workspaceRoot);
-    case "zod":
+    case "frontend-zod":
       return new zodInstaller(terminal, workspaceRoot);
-    case "zustand":
+    case "frontend-zustand":
       return new zustandInstaller(terminal, workspaceRoot);
-    case "reactRouter":
+    case "frontend-reactRouter":
       return new reactRouterInstaller(terminal, workspaceRoot);
-    case "reactHookForm":
+    case "frontend-reactHookForm":
       return new reactHookFormInstaller(terminal, workspaceRoot);
-    case "reactQuery":
+    case "frontend-reactQuery":
       return new reactQueryInstaller(terminal, workspaceRoot);
-    case "jotai":
+    case "frontend-jotai":
       return new jotaiInstaller(terminal, workspaceRoot);
-    case "tailwind":
+    case "frontend-tailwind":
       return new tailwindInstaller(
         terminal,
         workspaceRoot,
         selectedDependencies
       );
-    case "shadcn":
+    case "frontend-shadcn":
       return new ShadcnInstaller(terminal, workspaceRoot, selectedDependencies);
-    case "lucideIcons":
+    case "frontend-lucideIcons":
       return new LucideIconsInstaller(terminal, workspaceRoot);
 
-    case "reactIcons":
+    case "frontend-reactIcons":
       return new ReactIconsInstaller(terminal, workspaceRoot);
 
-    case "chartjs":
+    case "frontend-chartjs":
       return new ChartJsInstaller(terminal, workspaceRoot);
 
-    case "recharts":
+    case "frontend-recharts":
       return new RechartInstaller(terminal, workspaceRoot);
 
-    case "rectToastify":
+    case "frontend-rectToastify":
       return new ReactToastifyInstaller(terminal, workspaceRoot);
 
-    case "reactHotToast":
+    case "frontend-reactHotToast":
       return new ReactHotToastInstaller(terminal, workspaceRoot);
 
-    case "framerMotion":
+    case "frontend-framerMotion":
       return new FramerMotionInstaller(terminal, workspaceRoot);
 
-    case "gsap":
+    case "frontend-gsap":
       return new GsapInstaller(terminal, workspaceRoot);
 
-    case "reactDatatableComponent":
+    case "frontend-reactDatatableComponent":
       return new ReactDatatableComponentInstaller(terminal, workspaceRoot);
 
-    case "moment":
+    case "frontend-moment":
       return new MomentJsInstaller(terminal, workspaceRoot);
     //backend
-    case "express":
+    case "backend-express":
       return new ExpressInstaller(
         terminal,
         workspaceRoot,
         selectedDependencies
       );
-    case "nodemon":
+    case "backend-nodemon":
       return new nodemonInstaller(terminal, workspaceRoot);
-    case "cors":
+    case "backend-cors":
       return new corsInstaller(terminal, workspaceRoot);
-    case "jwt":
+    case "backend-jwt":
       return new jwtInstaller(terminal, workspaceRoot);
-    case "mongodb":
+    case "backend-mongodb":
       return new mongodbInstaller(terminal, workspaceRoot);
     default:
       return null;

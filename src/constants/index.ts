@@ -15,13 +15,13 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "JavaScript",
-            value: "js",
+            value: "frontend-js",
             checked: false,
             icon: "javascript",
           },
           {
             label: "TypeScript",
-            value: "ts",
+            value: "frontend-ts",
             checked: false,
             icon: "typescript",
           },
@@ -33,9 +33,9 @@ export const dependencies: DependencyOrCategory[] = [
         collapsible: true,
         icon: "framework-icon",
         children: [
-          { label: "React", value: "react", checked: false, icon: "react" },
-          { label: "Next", value: "next", checked: false, icon: "next" },
-          { label: "Vite", value: "vite", checked: false, icon: "vite" },
+          { label: "React", value: "frontend-react", checked: false, icon: "react" },
+          { label: "Next", value: "frontend-next", checked: false, icon: "next" },
+          { label: "Vite", value: "frontend-vite", checked: false, icon: "vite" },
         ],
       },
       {
@@ -46,13 +46,13 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "Tailwind CSS",
-            value: "tailwind",
+            value: "frontend-tailwind",
             checked: false,
             icon: "tailwind-icon",
           },
           {
             label: "Bootstrap",
-            value: "bootstrap",
+            value: "frontend-bootstrap",
             checked: false,
             icon: "bootstrap-icon",
           },
@@ -66,7 +66,7 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "Shadcn",
-            value: "shadcn",
+            value: "frontend-shadcn",
             checked: false,
             icon: "shadcn-icon",
           },
@@ -80,19 +80,19 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "Redux",
-            value: "redux",
+            value: "frontend-redux",
             checked: false,
             icon: "redux-icon",
           },
           {
             label: "Jotai",
-            value: "jotai",
+            value: "frontend-jotai",
             checked: false,
             icon: "jotai-icon",
           },
           {
             label: "Zustand",
-            value: "zustand",
+            value: "frontend-zustand",
             checked: false,
             icon: "zustand-icon",
           },
@@ -106,13 +106,13 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "Lucide Icons",
-            value: "lucideIcons",
+            value: "frontend-lucideIcons",
             checked: false,
             icon: "lucide-icon",
           },
           {
             label: "React Icons",
-            value: "reactIcons",
+            value: "frontend-reactIcons",
             checked: false,
             icon: "react-icon-icon",
           },
@@ -126,13 +126,13 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "Chart.js",
-            value: "chartjs",
+            value: "frontend-chartjs",
             checked: false,
             icon: "chartjs-icon",
           },
           {
             label: "Recharts",
-            value: "recharts",
+            value: "frontend-recharts",
             checked: false,
             icon: "not-found-icon",
           },
@@ -146,13 +146,13 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "React toastify",
-            value: "rectToastify",
+            value: "frontend-rectToastify",
             checked: false,
             icon: "not-found-icon",
           },
           {
             label: "React Hot Toast",
-            value: "reactHotToast",
+            value: "frontend-reactHotToast",
             checked: false,
             icon: "not-found-icon",
           },
@@ -166,13 +166,13 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "Framer Motion",
-            value: "framerMotion",
+            value: "frontend-framerMotion",
             checked: false,
             icon: "framer-motion-icon",
           },
           {
             label: "Gsap",
-            value: "gsap",
+            value: "frontend-gsap",
             checked: false,
             icon: "gsap-icon",
           },
@@ -186,32 +186,32 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "Axios",
-            value: "axios",
+            value: "frontend-axios",
             checked: false,
             icon: "axios-icon",
           },
           {
             label: "React Query",
-            value: "reactQuery",
+            value: "frontend-reactQuery",
             checked: false,
             icon: "react-query-icon",
           },
-          { label: "Zod", value: "zod", checked: false, icon: "zod-icon" },
+          { label: "Zod", value: "frontend-zod", checked: false, icon: "zod-icon" },
           {
             label: "React Datatable Component",
-            value: "reactDatatableComponent",
+            value: "frontend-reactDatatableComponent",
             checked: false,
             icon: "not-found-icon",
           },
           {
             label: "Momentjs",
-            value: "moment",
+            value: "frontend-moment",
             checked: false,
             icon: "moment-icon",
           },
           {
             label: "React Hook Form",
-            value: "reactHookForm",
+            value: "frontend-reactHookForm",
             checked: false,
             icon: "react-hook-form-icon",
           },
@@ -233,13 +233,13 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "JavaScript",
-            value: "back-js",
+            value: "backend-js",
             checked: false,
             icon: "javascript",
           },
           {
             label: "TypeScript",
-            value: "back-ts",
+            value: "backend-ts",
             checked: false,
             icon: "typescript",
           },
@@ -253,7 +253,7 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "Express",
-            value: "express",
+            value: "backend-express",
             checked: false,
             icon: "express-icon",
           },
@@ -261,13 +261,13 @@ export const dependencies: DependencyOrCategory[] = [
       },
       {
         label: "Databases",
-        value: "databases",
+        value: "backend-databases",
         collapsible: true,
         icon: "database-icon",
         children: [
           {
             label: "MongoDB",
-            value: "mongodb",
+            value: "backend-mongodb",
             checked: false,
             icon: "mongodb-icon",
           },
@@ -282,25 +282,25 @@ export const dependencies: DependencyOrCategory[] = [
         children: [
           {
             label: "Nodemon",
-            value: "nodemon",
+            value: "backend-nodemon",
             checked: false,
             icon: "nodemon-icon",
           },
           {
             label: "Axios",
-            value: "axios",
+            value: "backend-axios",
             checked: false,
             icon: "axios-icon",
           },
           {
             label: "Json Web Token",
-            value: "jwt",
+            value: "backend-jwt",
             checked: false,
             icon: "jwt-icon",
           },
           {
             label: "Cors",
-            value: "cors",
+            value: "backend-cors",
             checked: false,
             icon: "not-found-icon",
           },
@@ -315,4 +315,6 @@ export const onlyOneSelectCategoriesList: string[] = [
   "Languages",
   "State Management",
 ];
-export const topDependenciesList: string[] = ["react", "vite", "next"];
+export const topDependenciesList: string[] = ["frontend-react", "frontend-vite", "frontend-next"];
+
+export const tailwindDependentLibraries = ["frontend-shadcn", "frontend-radixui"];
