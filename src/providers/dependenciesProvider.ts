@@ -316,8 +316,6 @@ export class DependenciesProvider
       this.refresh(this.searchQuery);
       return;
     }
-    console.log(this.selectedFrontendDependencies);
-    console.log(this.selectedBackendDependencies);
     this.refresh();
   }
 

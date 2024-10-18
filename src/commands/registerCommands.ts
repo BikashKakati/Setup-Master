@@ -62,22 +62,22 @@ export function registerInstallCommand(
 
       const workspaceRoot = workspaceFolders[0].uri.fsPath;
 
-      selectedDependencies.forEach((dep) => {
-        console.log(dep);
-        const installer = getInstaller(
-          selectedDependencies,
-          dep,
-          terminal,
-          workspaceRoot
-        );
-        console.log(installer);
-        if (installer) {
-          installer.install();
-        }
-      });
+      function installDependencies(selectedDependencies:string[]){
+        selectedDependencies.forEach((dep) => {
+          const installer = getInstaller(
+            selectedDependencies,
+            dep,
+            terminal,
+            workspaceRoot
+          );
+          if (installer) {
+            installer.install();
+          }
+        });
+      }
 
       // Install dependencies one by one
-      // installDependencies(selectedDependencies);
+      installDependencies(selectedDependencies);
 
       vscode.window.showInformationMessage(
         `Installing ${selectedDependencies.length} dependencies...`
