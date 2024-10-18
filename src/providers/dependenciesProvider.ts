@@ -3,7 +3,8 @@ import * as vscode from "vscode";
 import {
   onlyOneSelectCategoriesList,
   tailwindDependentLibraries,
-  topDependenciesList,
+  topBackendDependenciesList,
+  topFrontendDependenciesList,
 } from "../constants";
 import { Category, Dependency, DependencyOrCategory } from "../types";
 
@@ -65,13 +66,13 @@ export class DependenciesProvider
     return undefined;
   }
   private addToFrontendDependencies(dep: Dependency) {
-    topDependenciesList.includes(dep.value)
+    topFrontendDependenciesList.includes(dep.value)
       ? this.selectedFrontendDependencies.unshift(dep.value)
       : this.selectedFrontendDependencies.push(dep.value);
   }
 
   private addToBackendDependencies(dep: Dependency) {
-    topDependenciesList.includes(dep.value)
+    topBackendDependenciesList.includes(dep.value)
       ? this.selectedBackendDependencies.unshift(dep.value)
       : this.selectedBackendDependencies.push(dep.value);
   }

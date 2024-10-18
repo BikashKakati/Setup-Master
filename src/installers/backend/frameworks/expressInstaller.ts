@@ -1,12 +1,14 @@
 import * as fs from "fs";
 import { DependencyInstaller } from "../../dependencyInstaller";
-import { topDependenciesList } from "../../../constants";
+import { topFrontendDependenciesList } from "../../../constants";
 
 export class ExpressInstaller extends DependencyInstaller {
   baseAppName = "backend";
   install() {
     if (
-      this.selectedDependencies.some((dep) => topDependenciesList.includes(dep))
+      this.selectedDependencies.some((dep) =>
+        topFrontendDependenciesList.includes(dep)
+      )
     ) {
       this.runCommand("cd ..");
     }

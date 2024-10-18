@@ -341,10 +341,13 @@ export const onlyOneSelectCategoriesList: string[] = [
   "Languages",
   "State Management",
 ];
-export const topDependenciesList: string[] = [
+export const topFrontendDependenciesList: string[] = [
   "frontend-react",
   "frontend-vite",
   "frontend-next",
+];
+export const topBackendDependenciesList: string[] = [
+  "backend-express",
 ];
 
 export const tailwindDependentLibraries = [
