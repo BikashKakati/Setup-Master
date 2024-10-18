@@ -51,6 +51,14 @@ export class DependenciesProvider
         return cat as Category;
       }
       if ("children" in cat) {
+        const foundInChildren = cat.children.some(
+          (child) => child.value === value
+        );
+
+        if (foundInChildren) {
+          return cat as Category;
+        }
+
         const found = this.findCategoryByLabel(cat.children, value);
         if (found) {
           return found;
@@ -124,6 +132,8 @@ export class DependenciesProvider
         element.value
       );
 
+      console.log("127 category", category);
+
       if (category && category.children) {
         return Promise.resolve(
           category.children.map((child) => {
@@ -189,6 +199,7 @@ export class DependenciesProvider
 
     return undefined;
   }
+
   getAllDependencies(): DependencyItem[] {
     const allDependencies: DependencyItem[] = [];
 
@@ -235,14 +246,12 @@ export class DependenciesProvider
     return filteredDependencies;
   }
 
-  // Toggle the selection (check/uncheck) of a dependency
   toggleDependency(dep: Dependency) {
     // user can select only option, logic...
     const nearestParentCategory = this.findNearestParentCategory(
       dep,
       this.dependencies as Category[]
     );
-
     if (
       nearestParentCategory &&
       nearestParentCategory.children &&
