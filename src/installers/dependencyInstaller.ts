@@ -13,7 +13,7 @@ export class DependencyInstaller {
     let counter = 1;
     let fileName = appName;
 
-    const getDirectories = (source: any = this.workspaceRoot) =>
+    const getDirectories = (source: string = this.workspaceRoot) =>
       fs
         .readdirSync(source, { withFileTypes: true })
         .filter((dirent) => dirent.isDirectory())
