@@ -10,9 +10,10 @@
 This VS Code extension makes it easy to install frontend and backend dependencies without using the terminal. Browse through categories, choose the libraries you need, and install them with one click!
 
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/65e844ba-f920-4d17-bee6-ce8468b401c0" alt="Setup Master" width="300" height="300" />
+</p>
 
-
-https://github.com/user-attachments/assets/f8bbbe99-632e-4b93-8971-da4729d6750b
 
 
 
