@@ -11,7 +11,7 @@ This VS Code extension makes it easy to install frontend and backend dependencie
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/65e844ba-f920-4d17-bee6-ce8468b401c0" alt="Setup Master" width="350" />
+  <img src="https://github.com/user-attachments/assets/65e844ba-f920-4d17-bee6-ce8468b401c0" alt="Setup Master" width="550" />
 </p>
 
 
