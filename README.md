@@ -9,6 +9,14 @@
 
 This VS Code extension makes it easy to install frontend and backend dependencies without using the terminal. Browse through categories, choose the libraries you need, and install them with one click!
 
+
+
+
+https://github.com/user-attachments/assets/f8bbbe99-632e-4b93-8971-da4729d6750b
+
+
+
+
 <!-- ## Installation
 
 ![Installation GIF](path-to-installation-gif) -->
