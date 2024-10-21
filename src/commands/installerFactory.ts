@@ -1,31 +1,31 @@
 import * as vscode from "vscode";
 import { DependencyInstaller } from "../installers/dependencyInstaller";
-import { MomentJsInstaller } from "../installers/common/MomentJsInstaller";
-import { ExpressInstaller } from "../installers/backend/frameworks/expressInstaller";
+import { momentJsInstaller } from "../installers/common/momentJsInstaller";
+import { expressInstaller} from "../installers/backend/frameworks/expressInstaller";
 import { jwtInstaller } from "../installers/backend/jwtInstaller";
 import { nodemonInstaller } from "../installers/backend/nodemonInstaller";
 import { corsInstaller } from "../installers/backend/corsInstaller";
 import { mongodbInstaller } from "../installers/backend/databases/mongoInstaller";
-import { ReduxInstaller } from "../installers/frontend/State-management/reduxInstaller";
+import { reduxInstaller } from "../installers/frontend/stateManagement/reduxInstaller";
 import { axiosInstaller } from "../installers/common/axiosInstaller";
-import { zodInstaller } from "../installers/frontend/Other-libraries/zodInstaller";
-import { zustandInstaller } from "../installers/frontend/State-management/zustandInstaller";
-import { reactRouterInstaller } from "../installers/frontend/Other-libraries/reactRouterInstaller";
-import { reactHookFormInstaller } from "../installers/frontend/Other-libraries/reactHookFormInstaller";
-import { jotaiInstaller } from "../installers/frontend/State-management/jotaiInstaller";
-import { tailwindInstaller } from "../installers/frontend/Styles/tailwindInstaller";
-import { ShadcnInstaller } from "../installers/frontend/UI-libraries/shadcnInstaller";
-import { LucideIconsInstaller } from "../installers/frontend/Other-libraries/LucideIconsInstaller";
-import { ReactIconsInstaller } from "../installers/frontend/Other-libraries/ReactIconsInstaller";
-import { ChartJsInstaller } from "../installers/frontend/Charts/ChartJsInstaller";
-import { RechartInstaller } from "../installers/frontend/Charts/RechartInstaller";
-import { FrameworkInstaller } from "../installers/frontend/Frameworks/FrameworkInstaller";
-import { ReactToastifyInstaller } from "../installers/frontend/Other-libraries/ReactToastifyInstaller";
-import { ReactHotToastInstaller } from "../installers/frontend/Other-libraries/ReactHotToastInstaller";
-import { FramerMotionInstaller } from "../installers/frontend/Animation-libraries/FramerMotionInstaller";
-import { GsapInstaller } from "../installers/frontend/Animation-libraries/GsapInstaller";
-import { ReactDatatableComponentInstaller } from "../installers/frontend/Other-libraries/ReactDatatableComponentInstaller";
-import { reactQueryInstaller } from "../installers/frontend/Other-libraries/rectQueryInstaller";
+import { zodInstaller } from "../installers/frontend/otherLibraries/zodInstaller";
+import { zustandInstaller } from "../installers/frontend/stateManagement/zustandInstaller";
+import { reactRouterInstaller } from "../installers/frontend/otherLibraries/reactRouterInstaller";
+import { reactHookFormInstaller } from "../installers/frontend/otherLibraries/reactHookFormInstaller";
+import { jotaiInstaller } from "../installers/frontend/stateManagement/jotaiInstaller";
+import { tailwindInstaller } from "../installers/frontend/styleLibraries/tailwindInstaller";
+import { shadcnInstaller } from "../installers/frontend/uiLibraries/shadcnInstaller";
+import { lucideIconsInstaller } from "../installers/frontend/otherLibraries/lucideIconsInstaller";
+import { reactIconsInstaller } from "../installers/frontend/otherLibraries/reactIconsInstaller";
+import { chartJsInstaller } from "../installers/frontend/charts/chartJsInstaller";
+import { rechartInstaller } from "../installers/frontend/charts/rechartInstaller";
+import { frameworkInstaller } from "../installers/frontend/frameworks/frameworkInstaller";
+import { reactToastifyInstaller } from "../installers/frontend/otherLibraries/reactToastifyInstaller";
+import { reactHotToastInstaller } from "../installers/frontend/otherLibraries/reactHotToastInstaller";
+import { framerMotionInstaller } from "../installers/frontend/animationLibraries/framerMotionInstaller";
+import { gsapInstaller } from "../installers/frontend/animationLibraries/gsapInstaller";
+import { reactDatatableComponentInstaller } from "../installers/frontend/otherLibraries/reactDatatableComponentInstaller";
+import { reactQueryInstaller } from "../installers/frontend/otherLibraries/reactQueryinstaller";
 
 export function getInstaller(
   selectedDependencies: string[],
@@ -37,13 +37,13 @@ export function getInstaller(
     case "frontend-vite":
     case "frontend-react":
     case "frontend-next":
-      return new FrameworkInstaller(
+      return new frameworkInstaller(
         terminal,
         workspaceRoot,
         selectedDependencies
       );
     case "frontend-redux":
-      return new ReduxInstaller(terminal, workspaceRoot);
+      return new reduxInstaller(terminal, workspaceRoot);
     case "frontend-axios":
     case "backend-axios":
       return new axiosInstaller(terminal, workspaceRoot);
@@ -66,40 +66,40 @@ export function getInstaller(
         selectedDependencies
       );
     case "frontend-shadcn":
-      return new ShadcnInstaller(terminal, workspaceRoot, selectedDependencies);
+      return new shadcnInstaller(terminal, workspaceRoot, selectedDependencies);
     case "frontend-lucideIcons":
-      return new LucideIconsInstaller(terminal, workspaceRoot);
+      return new lucideIconsInstaller(terminal, workspaceRoot);
 
     case "frontend-reactIcons":
-      return new ReactIconsInstaller(terminal, workspaceRoot);
+      return new reactIconsInstaller(terminal, workspaceRoot);
 
     case "frontend-chartjs":
-      return new ChartJsInstaller(terminal, workspaceRoot);
+      return new chartJsInstaller(terminal, workspaceRoot);
 
     case "frontend-recharts":
-      return new RechartInstaller(terminal, workspaceRoot);
+      return new rechartInstaller(terminal, workspaceRoot);
 
     case "frontend-rectToastify":
-      return new ReactToastifyInstaller(terminal, workspaceRoot);
+      return new reactToastifyInstaller(terminal, workspaceRoot);
 
     case "frontend-reactHotToast":
-      return new ReactHotToastInstaller(terminal, workspaceRoot);
+      return new reactHotToastInstaller(terminal, workspaceRoot);
 
     case "frontend-framerMotion":
-      return new FramerMotionInstaller(terminal, workspaceRoot);
+      return new framerMotionInstaller(terminal, workspaceRoot);
 
     case "frontend-gsap":
-      return new GsapInstaller(terminal, workspaceRoot);
+      return new gsapInstaller(terminal, workspaceRoot);
 
     case "frontend-reactDatatableComponent":
-      return new ReactDatatableComponentInstaller(terminal, workspaceRoot);
+      return new reactDatatableComponentInstaller(terminal, workspaceRoot);
 
     case "frontend-moment":
     case "backend-moment":
-      return new MomentJsInstaller(terminal, workspaceRoot);
+      return new momentJsInstaller(terminal, workspaceRoot);
     //backend
     case "backend-express":
-      return new ExpressInstaller(
+      return new expressInstaller(
         terminal,
         workspaceRoot,
         selectedDependencies

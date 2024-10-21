@@ -2,7 +2,7 @@ import * as fs from "fs";
 import { DependencyInstaller } from "../../dependencyInstaller";
 import { topFrontendDependenciesList } from "../../../constants";
 
-export class ExpressInstaller extends DependencyInstaller {
+export class expressInstaller extends DependencyInstaller {
   baseAppName = "backend";
   install() {
     if (

@@ -1,7 +1,7 @@
 import { DependencyInstaller } from "../../dependencyInstaller";
 import * as vscode from "vscode";
 
-export class ShadcnInstaller extends DependencyInstaller {
+export class shadcnInstaller extends DependencyInstaller {
   install() {
     const dependencyArray = this.selectedDependencies;
     if (dependencyArray.includes("next")) {
