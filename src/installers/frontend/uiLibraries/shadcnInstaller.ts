@@ -33,11 +33,15 @@ export class shadcnInstaller extends DependencyInstaller {
       });`;
 
       const configJsonCommand = `Set-Content -Path "${
-        dependencyArray.includes("ts") ? "tsconfig.json" : "jsconfig.json"
+        dependencyArray.includes("frontend-ts")
+          ? "tsconfig.json"
+          : "jsconfig.json"
       }" -Value '${configJsonContent.replace(/'/g, "''")}' -Encoding UTF8`;
 
       const viteConfigCommand = `Set-Content -Path "${
-        dependencyArray.includes("ts") ? "vite.config.ts" : "vite.config.js"
+        dependencyArray.includes("frontend-ts")
+          ? "vite.config.ts"
+          : "vite.config.js"
       }" -Value '${viteConfigContent.replace(/'/g, "''")}' -Encoding UTF8`;
 
       this.runCommand(configJsonCommand);
