@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 import { DependencyInstaller } from "../../dependencyInstaller";
 import path from "path";
 
-export class FrameworkInstaller extends DependencyInstaller {
+export class frameworkInstaller extends DependencyInstaller {
   baseAppName = "my-project";
 
   install() {
