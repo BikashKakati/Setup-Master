@@ -4,10 +4,10 @@ import * as vscode from "vscode";
 export class ShadcnInstaller extends DependencyInstaller {
   install() {
     const dependencyArray = this.selectedDependencies;
-    if (dependencyArray.includes("next")) {
+    if (dependencyArray.includes("frontend-next")) {
       this.runCommand("npx shadcn@latest init -d");
     }
-    if (dependencyArray.includes("vite")) {
+    if (dependencyArray.includes("frontend-vite")) {
       const configJsonContent = `{
         "compilerOptions": {
           "baseUrl": ".",

@@ -2,27 +2,19 @@
 
 <!--![Setup Master](./assets/Setup-master-Icon.png) -->
 
-
 <p align="center">
   <img src="./assets/Setup-master-Icon.png" alt="Setup Master" width="200" height="200" />
 </p>
 
 This VS Code extension makes it easy to install frontend and backend dependencies without using the terminal. Browse through categories, choose the libraries you need, and install them with one click!
 
-
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/65e844ba-f920-4d17-bee6-ce8468b401c0" alt="Setup Master" width="550" />
+  <img src="https://github.com/user-attachments/assets/65e844ba-f920-4d17-bee6-ce8468b401c0" alt="Setup Master" width="500" />
 </p>
-
-
-
-
 
 <!-- ## Installation
 
 ![Installation GIF](path-to-installation-gif) -->
-
-
 
 1. Open **Visual Studio Code**.
 2. Navigate to the **Extensions** view (`Ctrl+Shift+X`).
@@ -55,4 +47,3 @@ This VS Code extension makes it easy to install frontend and backend dependencie
 - **Frameworks**: Express
 - **Databases**: MongoDB
 - **Other Libraries**: Nodemon, Axios, Json Web Token, Cors
-
