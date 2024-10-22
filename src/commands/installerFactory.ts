@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import { DependencyInstaller } from "../installers/dependencyInstaller";
-import { momentJsInstaller } from "../installers/common/momentJsInstaller";
-import { expressInstaller} from "../installers/backend/frameworks/expressInstaller";
+import { expressInstaller } from "../installers/backend/frameworks/expressInstaller";
 import { jwtInstaller } from "../installers/backend/jwtInstaller";
 import { nodemonInstaller } from "../installers/backend/nodemonInstaller";
 import { corsInstaller } from "../installers/backend/corsInstaller";
@@ -17,15 +16,16 @@ import { tailwindInstaller } from "../installers/frontend/styleLibraries/tailwin
 import { shadcnInstaller } from "../installers/frontend/uiLibraries/shadcnInstaller";
 import { lucideIconsInstaller } from "../installers/frontend/otherLibraries/lucideIconsInstaller";
 import { reactIconsInstaller } from "../installers/frontend/otherLibraries/reactIconsInstaller";
-import { chartJsInstaller } from "../installers/frontend/charts/chartJsInstaller";
-import { rechartInstaller } from "../installers/frontend/charts/rechartInstaller";
-import { frameworkInstaller } from "../installers/frontend/frameworks/frameworkInstaller";
 import { reactToastifyInstaller } from "../installers/frontend/otherLibraries/reactToastifyInstaller";
 import { reactHotToastInstaller } from "../installers/frontend/otherLibraries/reactHotToastInstaller";
 import { framerMotionInstaller } from "../installers/frontend/animationLibraries/framerMotionInstaller";
 import { gsapInstaller } from "../installers/frontend/animationLibraries/gsapInstaller";
 import { reactDatatableComponentInstaller } from "../installers/frontend/otherLibraries/reactDatatableComponentInstaller";
 import { reactQueryInstaller } from "../installers/frontend/otherLibraries/reactQueryinstaller";
+import { frameworkInstaller } from "../installers/frontend/Frameworks/FrameworkInstaller";
+import { chartJsInstaller } from "../installers/frontend/Charts/ChartJsInstaller";
+import { rechartInstaller } from "../installers/frontend/Charts/RechartInstaller";
+import { momentJsInstaller } from "../installers/common/MomentJsInstaller";
 
 export function getInstaller(
   selectedDependencies: string[],
